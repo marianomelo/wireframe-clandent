@@ -1,0 +1,14 @@
+{
+    "name": "CLANDENT",
+    "url": "https://www.clandent.cl",
+    "client": "Clandent",
+    "status": "active",
+    "description": "Rediseño completo del sitio web",
+    "created": "2025",
+    "designer": "",
+    "login": {
+    "username": "clandent",
+    "password": "clandent123"
+  }
+    
+}

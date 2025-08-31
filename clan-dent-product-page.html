@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clan Dent - Resina Compuesta Fotocurable 4g</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1A9B9E',
+                        primaryDark: '#168487',
+                        primaryLight: '#E6F7F7',
+                        secondary: '#6B46C1',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F9FAFB'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .shadow-soft {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .placeholder {
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+            overflow: hidden;
+        }
+        
+        .tab-active {
+            border-bottom: 2px solid #1A9B9E;
+            color: #1A9B9E;
+        }
+
+        .img-thumbnail {
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .img-thumbnail:hover {
+            border-color: #1A9B9E;
+        }
+        
+        .img-thumbnail.active {
+            border-color: #1A9B9E;
+            border-width: 2px;
+        }
+    </style>
+</head>
+<body class="font-sans text-dark bg-gray-50">
+    <!-- Announcement Bar -->
+    <div class="bg-primaryDark text-white text-sm py-2">
+        <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <span class="hidden sm:inline">Somos líderes en distribución de productos odontológicos en Chile</span>
+                <span class="sm:hidden">Líderes en productos odontológicos</span>
+            </div>
+            <div class="flex items-center mt-1 sm:mt-0">
+                <a href="tel:+56226719562" class="flex items-center mx-2 hover:text-primaryLight">
+                    <i class="fas fa-phone-alt mr-1 text-xs"></i> +56 2 2671 9562
+                </a>
+                <span class="mx-1 hidden sm:inline">|</span>
+                <a href="mailto:info@clandent.cl" class="flex items-center mx-2 hover:text-primaryLight">
+                    <i class="fas fa-envelope mr-1 text-xs"></i> info@clandent.cl
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <!-- Top Navigation -->
+            <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <div class="h-10 w-40 placeholder rounded flex items-center justify-center bg-primaryLight">
+                            <span class="text-primary font-bold">CLAN DENT</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-grow mx-8 max-w-xl">
+                    <form action="/search" method="get" class="flex w-full rounded-full border-2 border-gray-200 focus-within:border-primary overflow-hidden">
+                        <input type="text" name="q" placeholder="Buscar productos dentales..." aria-label="Buscar productos" class="flex-grow py-2 px-4 outline-none text-sm">
+                        <button type="submit" class="bg-primary text-white px-5 hover:bg-primaryDark transition-all">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Navigation Icons -->
+                <nav class="flex items-center space-x-5">
+                    <a href="/account" class="text-gray-700 hover:text-primary transition-all" aria-label="Mi Cuenta">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </a>
+                    <a href="/cart" class="text-gray-700 hover:text-primary transition-all relative" aria-label="Ver Carrito">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </a>
+                    <button class="lg:hidden text-gray-700 hover:text-primary transition-all" aria-label="Abrir Menú" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Mobile Search (only visible on smaller screens) -->
+            <div class="md:hidden py-3">
+                <form action="/search" method="get" class="flex w-full rounded-full border-2 border-gray-200 focus-within:border-primary overflow-hidden">
+                    <input type="text" name="q" placeholder="Buscar productos..." aria-label="Buscar productos" class="flex-grow py-2 px-4 outline-none text-sm">
+                    <button type="submit" class="bg-primary text-white px-4 hover:bg-primaryDark transition-all">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Primary Navigation -->
+            <div class="hidden lg:flex justify-center py-3 space-x-10 text-gray-700">
+                <a href="/categorias" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-th-large mr-2"></i> Categorías
+                </a>
+                <a href="/ofertas" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-percentage mr-2"></i> Ofertas
+                </a>
+                <a href="/nuevos" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-star mr-2"></i> Recién Llegados
+                </a>
+                <a href="/marcas" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-tag mr-2"></i> Marcas
+                </a>
+                <a href="/contacto" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-envelope mr-2"></i> Contacto
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 py-4 px-4">
+            <nav class="flex flex-col space-y-4">
+                <a href="/categorias" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-th-large w-8"></i> Categorías
+                </a>
+                <a href="/ofertas" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-percentage w-8"></i> Ofertas
+                </a>
+                <a href="/nuevos" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-star w-8"></i> Recién Llegados
+                </a>
+                <a href="/marcas" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-tag w-8"></i> Marcas
+                </a>
+                <a href="/contacto" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-envelope w-8"></i> Contacto
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex text-sm">
+                <a href="/" class="text-gray-500 hover:text-primary">Inicio</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <a href="/categorias/resinas" class="text-gray-500 hover:text-primary">Materiales de Restauración</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <a href="/categorias/resinas/compuestas" class="text-gray-500 hover:text-primary">Resinas Compuestas</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-primary font-medium">Resina Compuesta Fotocurable 4g</span>
+            </nav>
+        </div>
+    </div>
+
+    <main class="py-10">
+        <div class="container mx-auto px-4">
+            <!-- Product Details Section -->
+            <div class="bg-white rounded-xl shadow-soft overflow-hidden mb-10">
+                <div class="p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row gap-10">
+                        <!-- Product Images (Left) -->
+                        <div class="md:w-2/5">
+                            <!-- Main Image -->
+                            <div class="placeholder w-full h-80 md:h-96 rounded-lg mb-4 bg-gray-100 flex items-center justify-center">
+                                <span class="text-2xl text-gray-400">IMAGEN PRINCIPAL</span>
+                            </div>
+                            
+                            <!-- Thumbnails -->
+                            <div class="grid grid-cols-5 gap-2">
+                                <div class="placeholder h-16 w-full rounded img-thumbnail active border-2 border-primary cursor-pointer"></div>
+                                <div class="placeholder h-16 w-full rounded img-thumbnail border border-gray-200 cursor-pointer"></div>
+                                <div class="placeholder h-16 w-full rounded img-thumbnail border border-gray-200 cursor-pointer"></div>
+                                <div class="placeholder h-16 w-full rounded img-thumbnail border border-gray-200 cursor-pointer"></div>
+                                <div class="placeholder h-16 w-full rounded img-thumbnail border border-gray-200 cursor-pointer flex items-center justify-center">
+                                    <i class="fas fa-play-circle text-gray-400"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Info (Right) -->
+                        <div class="md:w-3/5">
+                            <!-- Product Title and Badge -->
+                            <div class="flex flex-wrap items-start justify-between gap-2 mb-3">
+                                <div>
+                                    <span class="inline-block bg-primary text-white text-xs px-2 py-1 rounded-full mb-2">OFERTA ESPECIAL</span>
+                                    <h1 class="text-2xl md:text-3xl font-bold text-dark">Resina Compuesta Fotocurable 4g</h1>
+                                </div>
+                                <button class="text-gray-400 hover:text-red-500 transition-all text-2xl" title="Agregar a favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Product Info -->
+                            <div class="mb-4">
+                                <div class="flex flex-wrap items-center gap-3 text-sm text-gray-600 mb-3">
+                                    <span class="flex items-center">
+                                        <i class="fas fa-tag mr-1 text-primary"></i> Categoría: 
+                                        <a href="/categorias/resinas" class="ml-1 text-primary hover:underline">Resinas Compuestas</a>
+                                    </span>
+                                    <span class="flex items-center">
+                                        <i class="fas fa-barcode mr-1 text-primary"></i> SKU: RC-3562
+                                    </span>
+                                </div>
+                                
+                                <!-- Brand -->
+                                <div class="flex items-center mb-4">
+                                    <span class="text-gray-600 mr-2">Marca:</span>
+                                    <a href="/marcas/3m" class="flex items-center">
+                                        <div class="placeholder h-6 w-16 rounded flex items-center justify-center">
+                                            <span class="text-xs">3M</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                
+                                <!-- Rating -->
+                                <div class="flex items-center mb-4">
+                                    <div class="flex items-center mr-2">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                                    </div>
+                                    <span class="text-gray-600 text-sm">4.5/5 (87 valoraciones)</span>
+                                    <a href="#reviews" class="text-primary hover:underline text-sm ml-2">Ver opiniones</a>
+                                </div>
+                                
+                                <!-- Price -->
+                                <div class="flex items-center mb-6">
+                                    <span class="text-gray-500 line-through text-lg mr-2">$32.500</span>
+                                    <span class="text-3xl font-bold text-primary">$27.625</span>
+                                    <span class="ml-2 bg-red-100 text-red-600 text-xs font-semibold px-2 py-1 rounded">AHORRA 15%</span>
+                                </div>
+                                
+                                <!-- Short Description -->
+                                <p class="text-gray-600 mb-6">
+                                    Resina compuesta universal fotocurable para restauraciones anteriores y posteriores. Alta estética, resistencia al desgaste y fácil pulido. Compatible con todas las técnicas de fotocurado.
+                                </p>
+                                
+                                <!-- Product Variants -->
+                                <div class="mb-6">
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-medium mb-2">Color/Tono:</label>
+                                        <div class="flex flex-wrap gap-2">
+                                            <button class="border-2 border-primary bg-primaryLight text-primary px-4 py-2 rounded-md font-medium text-sm">A1</button>
+                                            <button class="border border-gray-300 px-4 py-2 rounded-md font-medium text-sm">A2</button>
+                                            <button class="border border-gray-300 px-4 py-2 rounded-md font-medium text-sm">A3</button>
+                                            <button class="border border-gray-300 px-4 py-2 rounded-md font-medium text-sm">A3.5</button>
+                                            <button class="border border-gray-300 px-4 py-2 rounded-md font-medium text-sm">B1</button>
+                                            <button class="border border-gray-300 px-4 py-2 rounded-md font-medium text-sm">B2</button>
+                                            <button class="border border-gray-300 px-4 py-2 rounded-md font-medium text-sm">Incisal</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-gray-700 font-medium mb-2">Presentación:</label>
+                                        <div class="flex flex-wrap gap-2">
+                                            <button class="border-2 border-primary bg-primaryLight text-primary px-4 py-2 rounded-md font-medium text-sm">Jeringa 4g</button>
+                                            <button class="border border-gray-300 px-4 py-2 rounded-md font-medium text-sm">Kit 4 Jeringas</button>
+                                            <button class="border border-gray-300 px-4 py-2 rounded-md font-medium text-sm">Kit 7 Jeringas</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Availability -->
+                                <div class="flex items-center mb-6">
+                                    <span class="inline-block bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">
+                                        <i class="fas fa-check-circle mr-1"></i> En stock (42 disponibles)
+                                    </span>
+                                    <span class="text-gray-500 text-sm ml-3">
+                                        <i class="fas fa-shipping-fast mr-1"></i> Envío en 24-48 horas
+                                    </span>
+                                </div>
+                                
+                                <!-- Add to Cart Section -->
+                                <div class="flex flex-col sm:flex-row gap-4">
+                                    <div class="flex border border-gray-300 rounded-lg">
+                                        <button class="px-4 py-3 border-r border-gray-300 text-gray-600 hover:bg-gray-100 transition-all">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" value="1" min="1" class="w-16 text-center border-none focus:outline-none py-3">
+                                        <button class="px-4 py-3 border-l border-gray-300 text-gray-600 hover:bg-gray-100 transition-all">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <button class="flex-grow bg-primary hover:bg-primaryDark text-white font-semibold py-3 px-6 rounded-lg transition-all flex items-center justify-center">
+                                        <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                                    </button>
+                                    
+                                    <button class="bg-accent hover:bg-amber-600 text-white font-semibold py-3 px-6 rounded-lg transition-all flex items-center justify-center">
+                                        <i class="fas fa-bolt mr-2"></i> Comprar Ahora
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Additional Features -->
+                            <div class="border-t border-gray-100 pt-5 mt-5">
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-shield-alt text-primary mr-2"></i>
+                                        <span class="text-sm">Producto Original Garantizado</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exchange-alt text-primary mr-2"></i>
+                                        <span class="text-sm">Devolución hasta 30 días</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-truck text-primary mr-2"></i>
+                                        <span class="text-sm">Envío gratis sobre $60.000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Tabs -->
+            <div class="bg-white rounded-xl shadow-soft overflow-hidden mb-10">
+                <div class="border-b border-gray-100">
+                    <div class="flex overflow-x-auto">
+                        <button class="tab-active py-4 px-6 font-medium text-primary focus:outline-none whitespace-nowrap">
+                            Descripción
+                        </button>
+                        <button class="py-4 px-6 font-medium text-gray-600 hover:text-primary focus:outline-none whitespace-nowrap">
+                            Especificaciones
+                        </button>
+                        <button class="py-4 px-6 font-medium text-gray-600 hover:text-primary focus:outline-none whitespace-nowrap">
+                            Indicaciones de Uso
+                        </button>
+                        <button class="py-4 px-6 font-medium text-gray-600 hover:text-primary focus:outline-none whitespace-nowrap" id="reviews">
+                            Valoraciones (87)
+                        </button>
+                        <button class="py-4 px-6 font-medium text-gray-600 hover:text-primary focus:outline-none whitespace-nowrap">
+                            Preguntas Frecuentes
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Tab Content -->
+                <div class="p-6 md:p-8">
+                    <!-- Description Tab (Active) -->
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">Descripción del Producto</h2>
+                        
+                        <div class="prose max-w-none text-gray-600">
+                            <p class="mb-4">
+                                La Resina Compuesta Fotocurable es un material de restauración universal diseñado para procedimientos directos anteriores y posteriores. Con una fórmula avanzada que combina una excelente estética con propiedades físicas superiores, esta resina ofrece a los profesionales dentales una solución versátil para una amplia gama de indicaciones clínicas.
+                            </p>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mt-6 mb-3">Características Principales</h3>
+                            
+                            <ul class="list-disc pl-5 mb-4 space-y-2">
+                                <li><strong>Estética Superior:</strong> Ofrece una excelente combinación de translucidez, opacidad y fluorescencia, similar a la de los dientes naturales.</li>
+                                <li><strong>Alta Resistencia:</strong> Presenta una excepcional resistencia a la fractura y al desgaste, especialmente importante en áreas de alta presión masticatoria.</li>
+                                <li><strong>Fácil Manipulación:</strong> Su consistencia no pegajosa facilita la modelación y adaptación a las paredes cavitarias.</li>
+                                <li><strong>Pulido Excepcional:</strong> Permite lograr un acabado de alto brillo con un mínimo esfuerzo, manteniendo su lustre a largo plazo.</li>
+                                <li><strong>Amplia Gama de Tonos:</strong> Disponible en múltiples tonalidades para satisfacer todas las necesidades clínicas, desde restauraciones anteriores altamente estéticas hasta posteriores funcionales.</li>
+                            </ul>
+                            
+                            <h3 class="text-lg font-semibold text-gray-800 mt-6 mb-3">Tecnología Avanzada</h3>
+                            
+                            <p class="mb-4">
+                                Esta resina incorpora la tecnología de relleno nanohíbrido, que combina partículas nanométricas con aglomerados de nanopartículas, proporcionando propiedades físicas óptimas mientras mantiene una excelente capacidad de pulido y retención del brillo. La matriz resinosa mejorada reduce la contracción de polimerización, minimizando el estrés en la interfaz adhesiva y el riesgo de microfiltración.
+                            </p>
+                            
+                            <div class="flex flex-col md:flex-row gap-6 mt-8 mb-4">
+                                <div class="md:w-1/2">
+                                    <div class="placeholder w-full h-48 rounded-lg">
+                                        <span>IMAGEN TÉCNICA DEL PRODUCTO</span>
+                                    </div>
+                                </div>
+                                <div class="md:w-1/2 flex flex-col justify-center">
+                                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Ventajas para el Paciente</h3>
+                                    <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                                        <li>Restauraciones de aspecto natural y alta durabilidad</li>
+                                        <li>Menor sensibilidad post-operatoria</li>
+                                        <li>Excelente resistencia a las manchas</li>
+                                        <li>Resistencia a largo plazo incluso en áreas de alta carga</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <p class="text-sm bg-primaryLight text-gray-700 p-4 rounded-lg mt-6">
+                                <i class="fas fa-info-circle text-primary mr-2"></i> <strong>Nota:</strong> Este producto es compatible con los sistemas adhesivos más comunes del mercado y puede ser fotopolimerizado con cualquier lámpara LED o halógena con intensidad lumínica adecuada.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     
+            <!-- Related Products -->
+                        <!-- Related Products -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold mb-6">Productos Relacionados</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Product 1 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-48 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-10%</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14 line-clamp-2">Adhesivo Universal Monodosis</h3>
+                            <div class="flex items-center mb-3">
+                                <div class="text-sm text-gray-500 line-through mr-2">$22.500</div>
+                                <div class="text-xl font-bold text-primary">$20.250</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star-half-alt text-yellow-400"></i>
+                                    <span class="text-xs text-gray-500 ml-1">(28)</span>
+                                </div>
+                                <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                            </div>
+                            <button class="w-full bg-gray-100 hover:bg-primaryLight text-gray-700 font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-48 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14 line-clamp-2">Kit de Pulido para Resinas Compuestas</h3>
+                            <div class="flex items-center mb-3">
+                                <div class="text-xl font-bold text-primary">$15.990</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="far fa-star text-yellow-400"></i>
+                                    <span class="text-xs text-gray-500 ml-1">(16)</span>
+                                </div>
+                                <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                            </div>
+                            <button class="w-full bg-gray-100 hover:bg-primaryLight text-gray-700 font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-48 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="absolute top-3 right-3 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">NUEVO</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14 line-clamp-2">Ácido Grabador en Gel 37%</h3>
+                            <div class="flex items-center mb-3">
+                                <div class="text-xl font-bold text-primary">$8.750</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <span class="text-xs text-gray-500 ml-1">(35)</span>
+                                </div>
+                                <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                            </div>
+                            <button class="w-full bg-gray-100 hover:bg-primaryLight text-gray-700 font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-48 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-25%</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14 line-clamp-2">Lámpara de Fotocurado LED Inalámbrica</h3>
+                            <div class="flex items-center mb-3">
+                                <div class="text-sm text-gray-500 line-through mr-2">$120.000</div>
+                                <div class="text-xl font-bold text-primary">$89.990</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star-half-alt text-yellow-400"></i>
+                                    <span class="text-xs text-gray-500 ml-1">(53)</span>
+                                </div>
+                                <div class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded">Pocas unidades</div>
+                            </div>
+                            <button class="w-full bg-gray-100 hover:bg-primaryLight text-gray-700 font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recently Viewed Products -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold mb-6">Vistos Recientemente</h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <!-- Product 1 -->
+                    <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                        <div class="placeholder w-full h-32 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Kit Blanqueamiento Dental Profesional</h3>
+                            <div class="text-primary font-bold text-sm mt-1">$78.500</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                        <div class="placeholder w-full h-32 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Guantes de Nitrilo Sin Polvo (Caja x100)</h3>
+                            <div class="text-primary font-bold text-sm mt-1">$13.990</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                        <div class="placeholder w-full h-32 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Alginato Cromático Premium 450g</h3>
+                            <div class="text-primary font-bold text-sm mt-1">$12.390</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                        <div class="placeholder w-full h-32 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Kit de Fresas Diamantadas Premium</h3>
+                            <div class="text-primary font-bold text-sm mt-1">$18.740</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 5 -->
+                    <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                        <div class="placeholder w-full h-32 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Cemento de Vidrio Ionómero para Restauración</h3>
+                            <div class="text-primary font-bold text-sm mt-1">$45.900</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Reviews Preview -->
+            <div class="bg-white rounded-xl shadow-soft overflow-hidden mb-10">
+                <div class="p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <h2 class="text-2xl font-bold">Valoraciones y Opiniones</h2>
+                        <a href="#reviews" class="mt-2 md:mt-0 text-primary hover:underline flex items-center">
+                            Ver todas las opiniones <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <!-- Overall Rating -->
+                        <div class="md:w-1/3 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-gray-200 pb-6 md:pb-0 md:pr-6">
+                            <div class="text-5xl font-bold text-dark mb-2">4.5</div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star-half-alt text-yellow-400"></i>
+                            </div>
+                            <div class="text-gray-500 text-sm mb-4">Basado en 87 valoraciones</div>
+                            
+                            <!-- Rating Breakdown -->
+                            <div class="w-full space-y-2">
+                                <!-- 5 Stars -->
+                                <div class="flex items-center">
+                                    <span class="text-sm w-12">5 <i class="fas fa-star text-yellow-400 text-xs"></i></span>
+                                    <div class="w-full bg-gray-200 rounded-full h-2 mx-2">
+                                        <div class="bg-primary h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                    <span class="text-sm w-8">65%</span>
+                                </div>
+                                
+                                <!-- 4 Stars -->
+                                <div class="flex items-center">
+                                    <span class="text-sm w-12">4 <i class="fas fa-star text-yellow-400 text-xs"></i></span>
+                                    <div class="w-full bg-gray-200 rounded-full h-2 mx-2">
+                                        <div class="bg-primary h-2 rounded-full" style="width: 25%"></div>
+                                    </div>
+                                    <span class="text-sm w-8">25%</span>
+                                </div>
+                                
+                                <!-- 3 Stars -->
+                                <div class="flex items-center">
+                                    <span class="text-sm w-12">3 <i class="fas fa-star text-yellow-400 text-xs"></i></span>
+                                    <div class="w-full bg-gray-200 rounded-full h-2 mx-2">
+                                        <div class="bg-primary h-2 rounded-full" style="width: 7%"></div>
+                                    </div>
+                                    <span class="text-sm w-8">7%</span>
+                                </div>
+                                
+                                <!-- 2 Stars -->
+                                <div class="flex items-center">
+                                    <span class="text-sm w-12">2 <i class="fas fa-star text-yellow-400 text-xs"></i></span>
+                                    <div class="w-full bg-gray-200 rounded-full h-2 mx-2">
+                                        <div class="bg-primary h-2 rounded-full" style="width: 2%"></div>
+                                    </div>
+                                    <span class="text-sm w-8">2%</span>
+                                </div>
+                                
+                                <!-- 1 Star -->
+                                <div class="flex items-center">
+                                    <span class="text-sm w-12">1 <i class="fas fa-star text-yellow-400 text-xs"></i></span>
+                                    <div class="w-full bg-gray-200 rounded-full h-2 mx-2">
+                                        <div class="bg-primary h-2 rounded-full" style="width: 1%"></div>
+                                    </div>
+                                    <span class="text-sm w-8">1%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Reviews -->
+                        <div class="md:w-2/3">
+                            <div class="space-y-6">
+                                <!-- Review 1 -->
+                                <div class="border-b border-gray-200 pb-6">
+                                    <div class="flex justify-between mb-2">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-star text-yellow-400"></i>
+                                            <i class="fas fa-star text-yellow-400"></i>
+                                            <i class="fas fa-star text-yellow-400"></i>
+                                            <i class="fas fa-star text-yellow-400"></i>
+                                            <i class="fas fa-star text-yellow-400"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-500">10/04/2025</span>
+                                    </div>
+                                    <h3 class="font-semibold mb-1">Excelente producto, muy fácil de manipular</h3>
+                                    <p class="text-sm text-gray-600 mb-2">
+                                        He probado varias resinas y ésta es por lejos la mejor. Muy buena consistencia, no se adhiere a los instrumentos y el acabado es excepcional. Los colores son muy fieles a la guía y la fluorescencia se ve muy natural.
+                                    </p>
+                                    <div class="flex items-center text-sm">
+                                        <span class="font-medium">Carlos M.</span>
+                                        <span class="mx-2 text-gray-400">|</span>
+                                        <span class="text-green-600">Compra verificada</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Review 2 -->
+                                <div>
+                                    <div class="flex justify-between mb-2">
+                                        <div class="flex items-center">
+                                            <i class="fas fa-star text-yellow-400"></i>
+                                            <i class="fas fa-star text-yellow-400"></i>
+                                            <i class="fas fa-star text-yellow-400"></i>
+                                            <i class="fas fa-star text-yellow-400"></i>
+                                            <i class="far fa-star text-yellow-400"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-500">02/04/2025</span>
+                                    </div>
+                                    <h3 class="font-semibold mb-1">Buena calidad pero algo costoso</h3>
+                                    <p class="text-sm text-gray-600 mb-2">
+                                        La resina tiene muy buenas propiedades físicas y estéticas. Se adapta bien a las paredes cavitarias y es fácil de pulir. Mi única observación es que el precio es un poco elevado comparado con otras marcas similares.
+                                    </p>
+                                    <div class="flex items-center text-sm">
+                                        <span class="font-medium">Andrea L.</span>
+                                        <span class="mx-2 text-gray-400">|</span>
+                                        <span class="text-green-600">Compra verificada</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="mt-6 border border-primary text-primary hover:bg-primaryLight font-medium py-2 px-4 rounded-lg transition-all w-full">
+                                Escribir una valoración
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Features Banner -->
+            <div class="bg-white rounded-xl shadow-soft overflow-hidden mb-10">
+                <div class="p-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                        <!-- Feature 1 -->
+                        <div class="flex flex-col items-center text-center p-4">
+                            <div class="w-16 h-16 rounded-full bg-primaryLight text-primary flex items-center justify-center mb-4 text-2xl">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Envío Rápido</h3>
+                            <p class="text-gray-600 text-sm">Despacho en 24-48 horas a toda la Región Metropolitana</p>
+                        </div>
+                        
+                        <!-- Feature 2 -->
+                        <div class="flex flex-col items-center text-center p-4">
+                            <div class="w-16 h-16 rounded-full bg-primaryLight text-primary flex items-center justify-center mb-4 text-2xl">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Garantía</h3>
+                            <p class="text-gray-600 text-sm">Todos nuestros productos cuentan con garantía de autenticidad</p>
+                        </div>
+                        
+                        <!-- Feature 3 -->
+                        <div class="flex flex-col items-center text-center p-4">
+                            <div class="w-16 h-16 rounded-full bg-primaryLight text-primary flex items-center justify-center mb-4 text-2xl">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Devoluciones</h3>
+                            <p class="text-gray-600 text-sm">30 días para cambios o devoluciones en productos sellados</p>
+                        </div>
+                        
+                        <!-- Feature 4 -->
+                        <div class="flex flex-col items-center text-center p-4">
+                            <div class="w-16 h-16 rounded-full bg-primaryLight text-primary flex items-center justify-center mb-4 text-2xl">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h3 class="text-lg font-semibold mb-2">Soporte</h3>
+                            <p class="text-gray-600 text-sm">Asesoría técnica especializada para todos tus productos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Sticky Add to Cart Bar (Mobile) -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 lg:hidden z-40">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-lg font-bold text-primary">$27.625</p>
+                <p class="text-xs text-gray-500 line-through">$32.500</p>
+            </div>
+            <button class="bg-primary hover:bg-primaryDark text-white font-semibold py-2 px-6 rounded-lg transition-all flex items-center">
+                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="mb-6">
+                        <div class="h-12 w-auto placeholder rounded-lg flex items-center justify-center bg-white bg-opacity-10 max-w-[180px]">
+                            <span class="text-white font-bold">CLAN DENT</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Distribuidores de productos odontológicos de alta calidad, al servicio de profesionales dentales en todo Chile desde 2005.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2">Contáctanos</h3>
+                    
+                    <div class="mb-6">
+                        <p class="font-semibold mb-2">Santiago:</p>
+                        <address class="text-gray-300 not-italic">
+                            <p class="mb-1">Jaime Castillo Velasco #2349</p>
+                            <p class="mb-1">Ñuñoa, Santiago</p>
+                            <p class="mb-1">
+                                <a href="tel:+56226719562" class="hover:text-primary">+56 2 2671 9562</a>
+                            </p>
+                            <p>
+                                <a href="mailto:info@clandent.cl" class="hover:text-primary">info@clandent.cl</a>
+                            </p>
+                        </address>
+                    </div>
+                    
+                    <div>
+                        <p class="font-semibold mb-2">Concepción:</p>
+                        <address class="text-gray-300 not-italic">
+                            <p class="mb-1">Tucapel #156, Local n° 3</p>
+                            <p class="mb-1">Concepción</p>
+                            <p class="mb-1">
+                                <a href="tel:+56412125186" class="hover:text-primary">+56 41 212 51 86</a>
+                            </p>
+                            <p>
+                                <a href="mailto:concepcion@clandent.cl" class="hover:text-primary">concepcion@clandent.cl</a>
+                            </p>
+                        </address>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2">Enlaces Rápidos</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="/categorias" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Categorías
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ofertas" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Ofertas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/nuevos" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Recién Llegados
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/marcas" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Marcas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/blog" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/sobre-nosotros" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Sobre Nosotros
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contacto" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Contacto
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Legal & Payment -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2">Información Legal</h3>
+                    <ul class="space-y-3 mb-8">
+                        <li>
+                            <a href="/terminos" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Términos y Condiciones
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/privacidad" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Política de Privacidad
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/envios" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Información de Envío
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/devoluciones" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Política de Devoluciones
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <h3 class="text-lg font-semibold mb-4">Medios de Pago</h3>
+                    <div class="flex space-x-3">
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">VISA</span>
+                        </div>
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">MC</span>
+                        </div>
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">AMEX</span>
+                        </div>
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">WEBPAY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+                <p class="mb-2">&copy; 2025 Clan Dent. Todos los derechos reservados.</p>
+                <p>Diseño profesional | Wireframe con Tailwind CSS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quick View Popup (Hidden by default) -->
+    <div id="quick-view-popup" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        
+        <!-- Popup Content -->
+        <div class="relative bg-white rounded-xl shadow-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto mx-4">
+            <!-- Close Button -->
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10" id="close-quick-view">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <!-- Content -->
+            <div class="p-6">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Product Image -->
+                    <div class="md:w-1/2">
+                        <div class="placeholder w-full h-64 md:h-80 rounded-lg">
+                            <span>IMAGEN AMPLIADA</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Details -->
+                    <div class="md:w-1/2">
+                        <h2 class="text-2xl font-bold text-dark mb-2">Resina Compuesta Fotocurable 4g</h2>
+                        <div class="flex items-center mb-2">
+                            <div class="flex items-center mr-2">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star-half-alt text-yellow-400"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm">4.5/5 (87 valoraciones)</span>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <span class="text-gray-500 line-through text-lg mr-2">$32.500</span>
+                            <span class="text-2xl font-bold text-primary">$27.625</span>
+                            <span class="ml-2 bg-red-100 text-red-600 text-xs font-semibold px-2 py-1 rounded">AHORRA 15%</span>
+                        </div>
+                        
+                        <p class="text-gray-600 mb-4">
+                            Resina compuesta universal fotocurable para restauraciones anteriores y posteriores. Alta estética, resistencia al desgaste y fácil pulido.
+                        </p>
+                        
+                        <!-- Quick Selection -->
+                        <div class="mb-5">
+                            <label class="block text-gray-700 font-medium mb-2">Color/Tono:</label>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <button class="border-2 border-primary bg-primaryLight text-primary px-3 py-1 rounded-md font-medium text-sm">A1</button>
+                                <button class="border border-gray-300 px-3 py-1 rounded-md font-medium text-sm">A2</button>
+                                <button class="border border-gray-300 px-3 py-1 rounded-md font-medium text-sm">A3</button>
+                                <button class="border border-gray-300 px-3 py-1 rounded-md font-medium text-sm">A3.5</button>
+                            </div>
+                            
+                            <div class="flex items-center mb-5">
+                                <span class="text-gray-600 mr-3">Cantidad:</span>
+                                <div class="flex border border-gray-300 rounded-lg">
+                                    <button class="px-3 py-1 border-r border-gray-300 text-gray-600 hover:bg-gray-100 transition-all">
+                                        <i class="fas fa-minus text-xs"></i>
+                                    </button>
+                                    <input type="number" value="1" min="1" class="w-12 text-center border-none focus:outline-none py-1">
+                                    <button class="px-3 py-1 border-l border-gray-300 text-gray-600 hover:bg-gray-100 transition-all">
+                                        <i class="fas fa-plus text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="flex gap-3">
+                            <button class="flex-grow bg-primary hover:bg-primaryDark text-white font-semibold py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                            <a href="/producto/resina-compuesta-fotocurable" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                Ver detalles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Popup (Hidden by default) -->
+    <div id="notification-popup" class="fixed bottom-5 right-5 z-50 bg-white rounded-lg shadow-lg p-4 max-w-md hidden animate__animated animate__fadeInUp">
+        <div class="flex items-start">
+            <div class="placeholder w-16 h-16 rounded flex-shrink-0">
+                <span class="text-xs">IMG</span>
+            </div>
+            <div class="ml-3 flex-grow">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-green-600 font-medium text-sm">¡Producto añadido al carrito!</p>
+                        <h4 class="font-semibold">Resina Compuesta Fotocurable 4g</h4>
+                    </div>
+                    <button class="text-gray-400 hover:text-gray-600" id="close-notification">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="flex mt-3">
+                    <a href="/cart" class="bg-primary hover:bg-primaryDark text-white text-sm py-1.5 px-3 rounded transition-all mr-2">
+                        Ver carrito
+                    </a>
+                    <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm py-1.5 px-3 rounded transition-all" id="continue-shopping">
+                        Seguir comprando
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Product Popup (Hidden by default) -->
+    <div id="share-popup" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        
+        <!-- Popup Content -->
+        <div class="relative bg-white rounded-xl shadow-xl max-w-md w-full mx-4 p-6">
+            <!-- Close Button -->
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600" id="close-share">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <!-- Content -->
+            <div class="text-center mb-6">
+                <h3 class="text-xl font-bold text-dark mb-2">Compartir Producto</h3>
+                <p class="text-gray-600 text-sm">Comparte este producto con tus colegas</p>
+            </div>
+            
+            <div class="grid grid-cols-4 gap-4 mb-6">
+                <a href="#" class="flex flex-col items-center justify-center p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-all">
+                    <i class="fab fa-facebook-f text-blue-600 text-xl mb-2"></i>
+                    <span class="text-xs">Facebook</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-all">
+                    <i class="fab fa-twitter text-blue-400 text-xl mb-2"></i>
+                    <span class="text-xs">Twitter</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center p-3 rounded-lg bg-green-50 hover:bg-green-100 transition-all">
+                    <i class="fab fa-whatsapp text-green-600 text-xl mb-2"></i>
+                    <span class="text-xs">WhatsApp</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center p-3 rounded-lg bg-red-50 hover:bg-red-100 transition-all">
+                    <i class="far fa-envelope text-red-500 text-xl mb-2"></i>
+                    <span class="text-xs">Email</span>
+                </a>
+            </div>
+            
+            <div>
+                <p class="text-sm font-medium mb-2">Enlace del producto</p>
+                <div class="flex">
+                    <input type="text" value="https://clandent.cl/producto/resina-compuesta-fotocurable" class="flex-grow py-2 px-3 border border-gray-300 rounded-l-lg text-sm bg-gray-50" readonly>
+                    <button class="bg-primary text-white font-medium py-2 px-4 rounded-r-lg hover:bg-primaryDark transition-all text-sm">
+                        Copiar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Zoom Modal (Hidden by default) -->
+    <div id="image-zoom-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-90"></div>
+        
+        <!-- Close Button -->
+        <button class="absolute top-4 right-4 text-white hover:text-gray-300 z-10" id="close-zoom">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        
+        <!-- Navigation Buttons -->
+        <button class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 z-10">
+            <i class="fas fa-chevron-left text-2xl"></i>
+        </button>
+        <button class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 z-10">
+            <i class="fas fa-chevron-right text-2xl"></i>
+        </button>
+        
+        <!-- Image Container -->
+        <div class="relative max-w-4xl w-full max-h-[90vh] px-4">
+            <div class="placeholder w-full h-[80vh] bg-transparent flex items-center justify-center">
+                <span class="text-4xl text-white">IMAGEN AMPLIADA</span>
+            </div>
+            <div class="text-center mt-4 text-white text-sm">
+                <p>Resina Compuesta Fotocurable 4g - Imagen 1 de 5</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-24 right-5 bg-primary hover:bg-primaryDark text-white rounded-full p-3 shadow-lg z-30 transition-all transform hover:-translate-y-1">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Simulating the tabs functionality
+        document.querySelectorAll('button[class^="py-4 px-6 font-medium"]').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('button[class^="py-4 px-6 font-medium"]').forEach(t => {
+                    t.classList.remove('tab-active');
+                    t.classList.add('text-gray-600');
+                    t.classList.add('hover:text-primary');
+                    t.classList.remove('text-primary');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('tab-active');
+                this.classList.remove('text-gray-600');
+                this.classList.remove('hover:text-primary');
+                this.classList.add('text-primary');
+            });
+        });
+        
+        // Thumbnail image selection
+        document.querySelectorAll('.img-thumbnail').forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                // Remove active class from all thumbnails
+                document.querySelectorAll('.img-thumbnail').forEach(t => {
+                    t.classList.remove('active');
+                    t.classList.remove('border-2');
+                    t.classList.remove('border-primary');
+                    t.classList.add('border');
+                    t.classList.add('border-gray-200');
+                });
+                
+                // Add active class to clicked thumbnail
+                this.classList.add('active');
+                this.classList.add('border-2');
+                this.classList.add('border-primary');
+                this.classList.remove('border');
+                this.classList.remove('border-gray-200');
+            });
+        });
+        
+        // Back to top button functionality
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+        
+        document.getElementById('back-to-top').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

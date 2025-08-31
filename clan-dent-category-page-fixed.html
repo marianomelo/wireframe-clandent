@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clan Dent - Resinas Compuestas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1A9B9E',
+                        primaryDark: '#168487',
+                        primaryLight: '#E6F7F7',
+                        secondary: '#6B46C1',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F9FAFB'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .shadow-soft {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .placeholder {
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+            overflow: hidden;
+        }
+        
+        /* Custom checkbox style */
+        input[type="checkbox"].checkbox-primary {
+            color: #1A9B9E;
+            border-color: #D1D5DB;
+            border-radius: 0.25rem;
+        }
+        
+        input[type="checkbox"].checkbox-primary:focus {
+            --tw-ring-color: #1A9B9E;
+        }
+        
+        /* Range slider custom styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #E5E7EB;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #1A9B9E;
+            border-radius: 50%;
+            border: 2px solid white;
+            cursor: pointer;
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #1A9B9E;
+            border-radius: 50%;
+            border: 2px solid white;
+            cursor: pointer;
+        }
+        
+        .product-card-transition {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card-transition:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="font-sans text-dark bg-gray-50">
+    <!-- Announcement Bar -->
+    <div class="bg-primaryDark text-white text-sm py-2">
+        <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <span class="hidden sm:inline">Somos líderes en distribución de productos odontológicos en Chile</span>
+                <span class="sm:hidden">Líderes en productos odontológicos</span>
+            </div>
+            <div class="flex items-center mt-1 sm:mt-0">
+                <a href="tel:+56226719562" class="flex items-center mx-2 hover:text-primaryLight">
+                    <i class="fas fa-phone-alt mr-1 text-xs"></i> +56 2 2671 9562
+                </a>
+                <span class="mx-1 hidden sm:inline">|</span>
+                <a href="mailto:info@clandent.cl" class="flex items-center mx-2 hover:text-primaryLight">
+                    <i class="fas fa-envelope mr-1 text-xs"></i> info@clandent.cl
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <!-- Top Navigation -->
+            <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <div class="h-10 w-40 placeholder rounded flex items-center justify-center bg-primaryLight">
+                            <span class="text-primary font-bold">CLAN DENT</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-grow mx-8 max-w-xl">
+                    <form action="/search" method="get" class="flex w-full rounded-full border-2 border-gray-200 focus-within:border-primary overflow-hidden">
+                        <input type="text" name="q" placeholder="Buscar productos dentales..." aria-label="Buscar productos" class="flex-grow py-2 px-4 outline-none text-sm">
+                        <button type="submit" class="bg-primary text-white px-5 hover:bg-primaryDark transition-all">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Navigation Icons -->
+                <nav class="flex items-center space-x-5">
+                    <a href="/account" class="text-gray-700 hover:text-primary transition-all" aria-label="Mi Cuenta">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </a>
+                    <a href="/cart" class="text-gray-700 hover:text-primary transition-all relative" aria-label="Ver Carrito">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </a>
+                    <button class="lg:hidden text-gray-700 hover:text-primary transition-all" aria-label="Abrir Menú" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Mobile Search (only visible on smaller screens) -->
+            <div class="md:hidden py-3">
+                <form action="/search" method="get" class="flex w-full rounded-full border-2 border-gray-200 focus-within:border-primary overflow-hidden">
+                    <input type="text" name="q" placeholder="Buscar productos..." aria-label="Buscar productos" class="flex-grow py-2 px-4 outline-none text-sm">
+                    <button type="submit" class="bg-primary text-white px-4 hover:bg-primaryDark transition-all">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Primary Navigation -->
+            <div class="hidden lg:flex justify-center py-3 space-x-10 text-gray-700">
+                <a href="/categorias" class="text-primary font-medium transition-all flex items-center border-b-2 border-primary pb-3 -mb-3">
+                    <i class="fas fa-th-large mr-2"></i> Categorías
+                </a>
+                <a href="/ofertas" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-percentage mr-2"></i> Ofertas
+                </a>
+                <a href="/nuevos" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-star mr-2"></i> Recién Llegados
+                </a>
+                <a href="/marcas" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-tag mr-2"></i> Marcas
+                </a>
+                <a href="/contacto" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-envelope mr-2"></i> Contacto
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 py-4 px-4">
+            <nav class="flex flex-col space-y-4">
+                <a href="/categorias" class="flex items-center py-2 px-4 bg-primaryLight text-primary rounded-lg">
+                    <i class="fas fa-th-large w-8"></i> Categorías
+                </a>
+                <a href="/ofertas" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-percentage w-8"></i> Ofertas
+                </a>
+                <a href="/nuevos" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-star w-8"></i> Recién Llegados
+                </a>
+                <a href="/marcas" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-tag w-8"></i> Marcas
+                </a>
+                <a href="/contacto" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-envelope w-8"></i> Contacto
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex text-sm">
+                <a href="/" class="text-gray-500 hover:text-primary">Inicio</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <a href="/categorias" class="text-gray-500 hover:text-primary">Categorías</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <a href="/categorias/materiales-restauracion" class="text-gray-500 hover:text-primary">Materiales de Restauración</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-primary font-medium">Resinas Compuestas</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Category Header -->
+    <div class="bg-primaryLight py-8 border-b border-gray-200">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <!-- Category Title and Description -->
+                <div>
+                    <h1 class="text-3xl font-bold text-dark mb-2">Resinas Compuestas</h1>
+                    <p class="text-gray-600 max-w-2xl">
+                        Explora nuestra amplia selección de resinas compuestas de alta calidad para restauraciones dentales estéticas y duraderas.
+                    </p>
+                </div>
+                
+                <!-- Category Sorting and View Options -->
+                <div class="flex items-center space-x-3">
+                    <!-- Sort Dropdown -->
+                    <div class="relative">
+                        <select class="border border-gray-300 rounded-lg px-4 py-2 pr-10 bg-white text-gray-700 appearance-none focus:outline-none focus:border-primary">
+                            <option value="default">Ordenar por</option>
+                            <option value="price-low">Precio: menor a mayor</option>
+                            <option value="price-high">Precio: mayor a menor</option>
+                            <option value="newest">Más recientes</option>
+                            <option value="popular">Más populares</option>
+                        </select>
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i class="fas fa-chevron-down text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Views Toggle -->
+                    <div class="border border-gray-300 rounded-lg flex overflow-hidden">
+                        <button class="px-3 py-2 bg-primary text-white">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="px-3 py-2 bg-white text-gray-600 hover:bg-gray-100">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Mobile Filter Button (visible only on small screens) -->
+                    <button class="lg:hidden px-4 py-2 border border-gray-300 rounded-lg flex items-center bg-white text-gray-700 hover:bg-gray-50" id="mobile-filter-button">
+                        <i class="fas fa-filter mr-2"></i> Filtros
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Filters (Desktop) -->
+                <div class="lg:w-1/4 hidden lg:block">
+                    <div class="bg-white rounded-lg shadow-soft p-6 sticky top-28">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold">Filtros</h2>
+                            <button class="text-primary text-sm hover:underline">
+                                Limpiar todo
+                            </button>
+                        </div>
+                        
+                        <!-- Price Range Filter -->
+                        <div class="mb-6 pb-6 border-b border-gray-200">
+                            <h3 class="font-semibold mb-4">Precio</h3>
+                            <div class="flex flex-col space-y-2">
+                                <div class="relative">
+                                    <input type="range" min="0" max="100000" value="50000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-sm text-gray-600">$0</div>
+                                    <div class="text-sm text-gray-600">$100.000</div>
+                                </div>
+                                <div class="flex items-center justify-between mt-2">
+                                    <input type="number" value="0" min="0" class="w-24 px-2 py-1 border border-gray-300 rounded text-sm" placeholder="Min">
+                                    <span class="text-gray-400">-</span>
+                                    <input type="number" value="50000" min="0" class="w-24 px-2 py-1 border border-gray-300 rounded text-sm" placeholder="Max">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Brand Filter -->
+                        <div class="mb-6 pb-6 border-b border-gray-200">
+                            <h3 class="font-semibold mb-4">Marca</h3>
+                            <div class="flex flex-col space-y-2 max-h-48 overflow-y-auto pr-2">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">3M ESPE (24)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Kerr (18)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">FGM (15)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Ivoclar Vivadent (12)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">GC (9)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Tokuyama (7)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Coltene (5)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Shade/Color Filter -->
+                        <div class="mb-6 pb-6 border-b border-gray-200">
+                            <h3 class="font-semibold mb-4">Tono/Color</h3>
+                            <div class="flex flex-col space-y-2 max-h-48 overflow-y-auto pr-2">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">A1 (32)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">A2 (38)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">A3 (37)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">A3.5 (28)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">B1 (25)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">B2 (22)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">C2 (19)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Universal (15)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Type Filter -->
+                        <div class="mb-6 pb-6 border-b border-gray-200">
+                            <h3 class="font-semibold mb-4">Tipo</h3>
+                            <div class="flex flex-col space-y-2">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Microhíbrida (28)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Nanohíbrida (35)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Nanopartículas (22)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Fluida (18)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Bulk Fill (15)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Availability Filter -->
+                        <div class="mb-6">
+                            <h3 class="font-semibold mb-4">Disponibilidad</h3>
+                            <div class="flex flex-col space-y-2">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4" checked>
+                                    <span class="ml-2 text-gray-700">En stock (72)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Stock limitado (15)</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="checkbox" class="checkbox-primary h-4 w-4">
+                                    <span class="ml-2 text-gray-700">Incluir por encargo (12)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Apply Filters Button (for mobile filters panel only) -->
+                        <button class="w-full bg-primary hover:bg-primaryDark text-white font-semibold py-3 px-4 rounded-lg transition-all hidden" id="apply-filters-mobile">
+                            Aplicar Filtros
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Products Grid -->
+                <div class="lg:w-3/4">
+                    <!-- Products Summary Info -->
+                    <div class="bg-white p-4 rounded-lg shadow-soft mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                        <div>
+                            <p class="text-gray-600"><span class="font-semibold">87</span> productos encontrados</p>
+                        </div>
+                        
+                        <!-- Active Filters Tags -->
+                        <div class="flex flex-wrap gap-2 mt-2 sm:mt-0">
+                            <div class="flex items-center bg-primaryLight text-primary rounded-full px-3 py-1 text-sm">
+                                <span>En stock</span>
+                                <button class="ml-2 text-xs">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center bg-primaryLight text-primary rounded-full px-3 py-1 text-sm">
+                                <span>$0 - $50.000</span>
+                                <button class="ml-2 text-xs">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Products Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Product 1 -->
+                        <div class="bg-white rounded-lg shadow-soft overflow-hidden product-card-transition border border-gray-100">
+                            <div class="relative">
+                                <a href="/producto/filtek-z350-xt">
+                                    <div class="placeholder w-full h-48 bg-gray-100">
+                                        <span>IMAGEN PRODUCTO</span>
+                                    </div>
+                                </a>
+                                <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-15%</span>
+                                <span class="absolute top-3 right-3 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">POPULAR</span>
+                            </div>
+                            <div class="p-5">
+                                <a href="/producto/filtek-z350-xt">
+                                    <h3 class="text-lg font-semibold text-dark mb-2 h-14 line-clamp-2">Filtek Z350 XT Resina Universal - 3M ESPE</h3>
+                                </a>
+                                <div class="flex items-center mb-3">
+                                    <div class="text-sm text-gray-500 line-through mr-2">$32.500</div>
+                                    <div class="text-xl font-bold text-primary">$27.625</div>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                                        <span class="text-xs text-gray-500 ml-1">(87)</span>
+                                    </div>
+                                    <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                                </div>
+                                <div class="flex space-x-2 mb-3">
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A1</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A2</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A3</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">+5</span>
+                                </div>
+                                <button class="w-full bg-primary hover:bg-primaryDark text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                    <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 2 -->
+                        <div class="bg-white rounded-lg shadow-soft overflow-hidden product-card-transition border border-gray-100">
+                            <div class="relative">
+                                <a href="/producto/tetric-n-ceram">
+                                    <div class="placeholder w-full h-48 bg-gray-100">
+                                        <span>IMAGEN PRODUCTO</span>
+                                    </div>
+                                </a>
+                                <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-10%</span>
+                            </div>
+                            <div class="p-5">
+                                <a href="/producto/tetric-n-ceram">
+                                    <h3 class="text-lg font-semibold text-dark mb-2 h-14 line-clamp-2">Tetric N-Ceram Resina Nanohíbrida - Ivoclar Vivadent</h3>
+                                </a>
+                                <div class="flex items-center mb-3">
+                                    <div class="text-sm text-gray-500 line-through mr-2">$30.900</div>
+                                    <div class="text-xl font-bold text-primary">$27.810</div>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="far fa-star text-yellow-400"></i>
+                                        <span class="text-xs text-gray                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="far fa-star text-yellow-400"></i>
+                                        <span class="text-xs text-gray-500 ml-1">(64)</span>
+                                    </div>
+                                    <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                                </div>
+                                <div class="flex space-x-2 mb-3">
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A1</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A2</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A3</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">+4</span>
+                                </div>
+                                <button class="w-full bg-primary hover:bg-primaryDark text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                    <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 3 -->
+                        <div class="bg-white rounded-lg shadow-soft overflow-hidden product-card-transition border border-gray-100">
+                            <div class="relative">
+                                <a href="/producto/herculite-ultra">
+                                    <div class="placeholder w-full h-48 bg-gray-100">
+                                        <span>IMAGEN PRODUCTO</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <a href="/producto/herculite-ultra">
+                                    <h3 class="text-lg font-semibold text-dark mb-2 h-14 line-clamp-2">Herculite Ultra Resina Universal - Kerr</h3>
+                                </a>
+                                <div class="flex items-center mb-3">
+                                    <div class="text-xl font-bold text-primary">$29.500</div>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <span class="text-xs text-gray-500 ml-1">(52)</span>
+                                    </div>
+                                    <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                                </div>
+                                <div class="flex space-x-2 mb-3">
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A1</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A2</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A3</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">+6</span>
+                                </div>
+                                <button class="w-full bg-primary hover:bg-primaryDark text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                    <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 4 -->
+                        <div class="bg-white rounded-lg shadow-soft overflow-hidden product-card-transition border border-gray-100">
+                            <div class="relative">
+                                <a href="/producto/opallis">
+                                    <div class="placeholder w-full h-48 bg-gray-100">
+                                        <span>IMAGEN PRODUCTO</span>
+                                    </div>
+                                </a>
+                                <span class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-20%</span>
+                            </div>
+                            <div class="p-5">
+                                <a href="/producto/opallis">
+                                    <h3 class="text-lg font-semibold text-dark mb-2 h-14 line-clamp-2">Opallis Resina Universal Nanohíbrida - FGM</h3>
+                                </a>
+                                <div class="flex items-center mb-3">
+                                    <div class="text-sm text-gray-500 line-through mr-2">$25.900</div>
+                                    <div class="text-xl font-bold text-primary">$20.720</div>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                                        <span class="text-xs text-gray-500 ml-1">(45)</span>
+                                    </div>
+                                    <div class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded">Pocas unidades</div>
+                                </div>
+                                <div class="flex space-x-2 mb-3">
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A1</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A2</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A3</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">+5</span>
+                                </div>
+                                <button class="w-full bg-primary hover:bg-primaryDark text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                    <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 5 -->
+                        <div class="bg-white rounded-lg shadow-soft overflow-hidden product-card-transition border border-gray-100">
+                            <div class="relative">
+                                <a href="/producto/admira-fusion">
+                                    <div class="placeholder w-full h-48 bg-gray-100">
+                                        <span>IMAGEN PRODUCTO</span>
+                                    </div>
+                                </a>
+                                <span class="absolute top-3 right-3 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">NUEVO</span>
+                            </div>
+                            <div class="p-5">
+                                <a href="/producto/admira-fusion">
+                                    <h3 class="text-lg font-semibold text-dark mb-2 h-14 line-clamp-2">Admira Fusion Resina Nanohíbrida - VOCO</h3>
+                                </a>
+                                <div class="flex items-center mb-3">
+                                    <div class="text-xl font-bold text-primary">$32.800</div>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="far fa-star text-yellow-400"></i>
+                                        <span class="text-xs text-gray-500 ml-1">(32)</span>
+                                    </div>
+                                    <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                                </div>
+                                <div class="flex space-x-2 mb-3">
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A1</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A2</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A3</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">+3</span>
+                                </div>
+                                <button class="w-full bg-primary hover:bg-primaryDark text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                    <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Product 6 -->
+                        <div class="bg-white rounded-lg shadow-soft overflow-hidden product-card-transition border border-gray-100">
+                            <div class="relative">
+                                <a href="/producto/brilliant-everglow">
+                                    <div class="placeholder w-full h-48 bg-gray-100">
+                                        <span>IMAGEN PRODUCTO</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <a href="/producto/brilliant-everglow">
+                                    <h3 class="text-lg font-semibold text-dark mb-2 h-14 line-clamp-2">BRILLIANT EverGlow Resina Universal - Coltene</h3>
+                                </a>
+                                <div class="flex items-center mb-3">
+                                    <div class="text-xl font-bold text-primary">$31.500</div>
+                                </div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="fas fa-star text-yellow-400"></i>
+                                        <i class="far fa-star text-yellow-400"></i>
+                                        <span class="text-xs text-gray-500 ml-1">(28)</span>
+                                    </div>
+                                    <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                                </div>
+                                <div class="flex space-x-2 mb-3">
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A1</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A2</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">A3</span>
+                                    <span class="text-xs border border-gray-200 px-2 py-1 rounded-full bg-gray-50">+4</span>
+                                </div>
+                                <button class="w-full bg-primary hover:bg-primaryDark text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                    <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- More product cards would continue here -->
+                        <!-- Repeated for demonstration - in production these would be dynamic -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="mt-10 flex justify-center">
+                        <nav class="flex items-center space-x-2">
+                            <a href="#" class="px-3 py-2 rounded bg-white border border-gray-300 text-gray-500 hover:bg-gray-50">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                            <a href="#" class="px-4 py-2 rounded bg-primary text-white font-medium">1</a>
+                            <a href="#" class="px-4 py-2 rounded bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">2</a>
+                            <a href="#" class="px-4 py-2 rounded bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">3</a>
+                            <span class="px-3 py-2">...</span>
+                            <a href="#" class="px-4 py-2 rounded bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">8</a>
+                            <a href="#" class="px-3 py-2 rounded bg-white border border-gray-300 text-gray-500 hover:bg-gray-50">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Related Categories Section -->
+    <section class="py-10 bg-gray-50 border-t border-gray-200">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6">Categorías Relacionadas</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Related Category 1 -->
+                <a href="/categorias/adhesivos-dentales" class="bg-white rounded-lg shadow-soft overflow-hidden flex items-center p-4 hover:shadow-md transition-all">
+                    <div class="w-16 h-16 bg-primaryLight rounded-full flex-shrink-0 flex items-center justify-center">
+                        <i class="fas fa-tooth text-primary text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-dark">Adhesivos Dentales</h3>
+                        <p class="text-sm text-gray-600">28 productos</p>
+                    </div>
+                </a>
+                
+                <!-- Related Category 2 -->
+                <a href="/categorias/acidos-grabadores" class="bg-white rounded-lg shadow-soft overflow-hidden flex items-center p-4 hover:shadow-md transition-all">
+                    <div class="w-16 h-16 bg-primaryLight rounded-full flex-shrink-0 flex items-center justify-center">
+                        <i class="fas fa-flask text-primary text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-dark">Ácidos Grabadores</h3>
+                        <p class="text-sm text-gray-600">15 productos</p>
+                    </div>
+                </a>
+                
+                <!-- Related Category 3 -->
+                <a href="/categorias/ionemeros" class="bg-white rounded-lg shadow-soft overflow-hidden flex items-center p-4 hover:shadow-md transition-all">
+                    <div class="w-16 h-16 bg-primaryLight rounded-full flex-shrink-0 flex items-center justify-center">
+                        <i class="fas fa-vial text-primary text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-dark">Ionómeros de Vidrio</h3>
+                        <p class="text-sm text-gray-600">22 productos</p>
+                    </div>
+                </a>
+                
+                <!-- Related Category 4 -->
+                <a href="/categorias/pulido-acabado" class="bg-white rounded-lg shadow-soft overflow-hidden flex items-center p-4 hover:shadow-md transition-all">
+                    <div class="w-16 h-16 bg-primaryLight rounded-full flex-shrink-0 flex items-center justify-center">
+                        <i class="fas fa-magic text-primary text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="font-semibold text-dark">Pulido y Acabado</h3>
+                        <p class="text-sm text-gray-600">34 productos</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Recently Viewed Products -->
+    <section class="py-10 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6">Productos Vistos Recientemente</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                    <a href="/producto/filtek-bulk-fill">
+                        <div class="placeholder w-full h-28 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                    </a>
+                    <div class="p-3">
+                        <a href="/producto/filtek-bulk-fill">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Filtek Bulk Fill Posterior - 3M ESPE</h3>
+                        </a>
+                        <div class="text-primary font-bold text-sm mt-1">$35.900</div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                    <a href="/producto/estelite-sigma-quick">
+                        <div class="placeholder w-full h-28 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                    </a>
+                    <div class="p-3">
+                        <a href="/producto/estelite-sigma-quick">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Estelite Sigma Quick - Tokuyama</h3>
+                        </a>
+                        <div class="text-primary font-bold text-sm mt-1">$33.500</div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                    <a href="/producto/adhesivo-single-bond">
+                        <div class="placeholder w-full h-28 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                    </a>
+                    <div class="p-3">
+                        <a href="/producto/adhesivo-single-bond">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Adhesivo Single Bond Universal - 3M ESPE</h3>
+                        </a>
+                        <div class="text-primary font-bold text-sm mt-1">$42.900</div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                    <a href="/producto/kit-pulido-enhance">
+                        <div class="placeholder w-full h-28 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                    </a>
+                    <div class="p-3">
+                        <a href="/producto/kit-pulido-enhance">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Kit de Pulido Enhance - Dentsply</h3>
+                        </a>
+                        <div class="text-primary font-bold text-sm mt-1">$18.500</div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                    <a href="/producto/sof-lex-pop-on">
+                        <div class="placeholder w-full h-28 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                    </a>
+                    <div class="p-3">
+                        <a href="/producto/sof-lex-pop-on">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Discos Sof-Lex Pop-On - 3M ESPE</h3>
+                        </a>
+                        <div class="text-primary font-bold text-sm mt-1">$25.600</div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="bg-white rounded-lg shadow-soft hover:shadow-md transition-all overflow-hidden border border-gray-100">
+                    <a href="/producto/grabador-condac-37">
+                        <div class="placeholder w-full h-28 bg-gray-100">
+                            <span class="text-xs">IMAGEN</span>
+                        </div>
+                    </a>
+                    <div class="p-3">
+                        <a href="/producto/grabador-condac-37">
+                            <h3 class="text-sm font-medium line-clamp-2 h-10">Ácido Grabador Condac 37% - FGM</h3>
+                        </a>
+                        <div class="text-primary font-bold text-sm mt-1">$8.900</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Call to Action -->
+    <section class="py-12 bg-gradient-to-r from-primary to-primaryDark text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">¿No encuentras el producto que buscas?</h2>
+            <p class="text-white text-opacity-90 mb-6 max-w-2xl mx-auto">
+                Contamos con una amplia red de proveedores internacionales. Si no encuentras el producto que necesitas, contáctanos y haremos lo posible por conseguirlo para ti.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/contacto" class="bg-white hover:bg-gray-100 text-primary font-semibold py-3 px-8 rounded-lg transition-all transform hover:-translate-y-1 inline-flex items-center justify-center">
+                    <i class="fas fa-envelope mr-2"></i> Contactar Ahora
+                </a>
+                <a href="https://wa.me/56226719562" class="bg-transparent hover:bg-white hover:bg-opacity-20 text-white border-2 border-white font-semibold py-3 px-8 rounded-lg transition-all transform hover:-translate-y-1 inline-flex items-center justify-center">
+                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="mb-6">
+                        <div class="h-12 w-auto placeholder rounded-lg flex items-center justify-center bg-white bg-opacity-10 max-w-[180px]">
+                            <span class="text-white font-bold">CLAN DENT</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Distribuidores de productos odontológicos de alta calidad, al servicio de profesionales dentales en todo Chile desde 1989.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2">Contáctanos</h3>
+                    
+                    <div class="mb-6">
+                        <p class="font-semibold mb-2">Santiago:</p>
+                        <address class="text-gray-300 not-italic">
+                            <p class="mb-1">Jaime Castillo Velasco #2349</p>
+                            <p class="mb-1">Ñuñoa, Santiago</p>
+                            <p class="mb-1">
+                                <a href="tel:+56226719562" class="hover:text-primary">+56 2 2671 9562</a>
+                            </p>
+                            <p>
+                                <a href="mailto:info@clandent.cl" class="hover:text-primary">info@clandent.cl</a>
+                            </p>
+                        </address>
+                    </div>
+                    
+                    <div>
+                        <p class="font-semibold mb-2">Concepción:</p>
+                        <address class="text-gray-300 not-italic">
+                            <p class="mb-1">Tucapel #156, Local n° 3</p>
+                            <p class="mb-1">Concepción</p>
+                            <p class="mb-1">
+                                <a href="tel:+56412125186" class="hover:text-primary">+56 41 212 51 86</a>
+                            </p>
+                            <p>
+                                <a href="mailto:concepcion@clandent.cl" class="hover:text-primary">concepcion@clandent.cl</a>
+                            </p>
+                        </address>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2">Enlaces Rápidos</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="/categorias" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Categorías
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ofertas" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Ofertas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/nuevos" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Recién Llegados
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/marcas" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Marcas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/blog" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/sobre-nosotros" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Sobre Nosotros
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contacto" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Contacto
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Legal & Payment -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2">Información Legal</h3>
+                    <ul class="space-y-3 mb-8">
+                        <li>
+                            <a href="/terminos" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Términos y Condiciones
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/privacidad" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Política de Privacidad
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/envios" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Información de Envío
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/devoluciones" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Política de Devoluciones
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <h3 class="text-lg font-semibold mb-4">Medios de Pago</h3>
+                    <div class="flex space-x-3">
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">VISA</span>
+                        </div>
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">MC</span>
+                        </div>
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">AMEX</span>
+                        </div>
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">WEBPAY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+                <p class="mb-2">&copy; 2025 Clan Dent. Todos los derechos reservados.</p>
+                <p>Diseño profesional | Wireframe con Tailwind CSS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Filters Panel (Hidden by default) -->
+    <div id="mobile-filters-panel" class="fixed inset-0 z-50 hidden">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-50" id="close-mobile-filters"></div>
+        
+        <!-- Panel Content -->
+        <div class="absolute top-0 right-0 h-full w-full max-w-sm bg-white shadow-xl overflow-y-auto">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="text-lg font-bold">Filtros</h3>
+                <button id="close-mobile-filters-button" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-4">
+                <!-- Mobile filters content - same as desktop filters -->
+                <!-- Price Range Filter -->
+                <div class="mb-6 pb-6 border-b border-gray-200">
+                    <h3 class="font-semibold mb-4">Precio</h3>
+                    <div class="flex flex-col space-y-2">
+                        <div class="relative">
+                            <input type="range" min="0" max="100000" value="50000" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-sm text-gray-600">$0</div>
+                            <div class="text-sm text-gray-600">$100.000</div>
+                        </div>
+                        <div class="flex items-center justify-between mt-2">
+                            <input type="number" value="0" min="0" class="w-24 px-2 py-1 border border-gray-300 rounded text-sm" placeholder="Min">
+                            <span class="text-gray-400">-</span>
+                            <input type="number" value="50000" min="0" class="w-24 px-2 py-1 border border-gray-300 rounded text-sm" placeholder="Max">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Brand Filter -->
+                <div class="mb-6 pb-6 border-b border-gray-200">
+                    <h3 class="font-semibold mb-4">Marca</h3>
+                    <div class="flex flex-col space-y-2">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="checkbox-primary h-4 w-4">
+                            <span class="ml-2 text-gray-700">3M ESPE (24)</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="checkbox-primary h-4 w-4">
+                            <span class="ml-2 text-gray-700">Kerr (18)</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="checkbox-primary h-4 w-4">
+                            <span class="ml-2 text-gray-700">FGM (15)</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="checkbox-primary h-4 w-4">
+                            <span class="ml-2 text-gray-700">Ivoclar Vivadent (12)</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="checkbox-primary h-4 w-4">
+                            <span class="ml-2 text-gray-700">GC (9)</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Other filters from desktop -->
+                <!-- Type Filter -->
+                <div class="mb-6 pb-6 border-b border-gray-200">
+                    <h3 class="font-semibold mb-4">Tipo</h3>
+                    <div class="flex flex-col space-y-2">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="checkbox-primary h-4 w-4">
+                            <span class="ml-2 text-gray-700">Microhíbrida (28)</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="checkbox-primary h-4 w-4">
+                            <span class="ml-2 text-gray-700">Nanohíbrida (35)</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" class="checkbox-primary h-4 w-4">
+                            <span class="ml-2 text-gray-700">Nanopartículas (22)</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Apply Filters Button -->
+                <button class="w-full bg-primary hover:bg-primaryDark text-white font-semibold py-3 px-4 rounded-lg transition-all mb-4">
+                    Aplicar Filtros
+                </button>
+                
+                <!-- Clear Filters Link -->
+                <button class="w-full text-primary text-center hover:underline">
+                    Limpiar todos los filtros
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal (Hidden by default) -->
+    <div id="quick-view-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-50" id="close-quick-view"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative bg-white rounded-xl shadow-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto mx-4">
+            <!-- Close Button -->
+            <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 z-10" id="close-quick-view-button">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <!-- Quick View Content -->
+            <div class="p-6">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <!-- Product Image -->
+                    <div class="md:w-1/2">
+                        <div class="placeholder w-full h-64 md:h-80 rounded-lg">
+                            <span>IMAGEN PRODUCTO AMPLIADA</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Details -->
+                    <div class="md:w-1/2">
+                        <h2 class="text-2xl font-bold text-dark mb-2">Filtek Z350 XT Resina Universal - 3M ESPE</h2>
+                        <div class="flex items-center mb-2">
+                            <div class="flex items-center mr-2">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star-half-alt text-yellow-400"></i>
+                            </div>
+                            <span class="text-gray-600 text-sm">4.5/5 (87 valoraciones)</span>
+                        </div>
+                        
+                        <div class="flex items-center mb-4">
+                            <span class="text-gray-500 line-through text-lg mr-2">$32.500</span>
+                            <span class="text-2xl font-bold text-primary">$27.625</span>
+                            <span class="ml-2 bg-red-100 text-red-600 text-xs font-semibold px-2 py-1 rounded">AHORRA 15%</span>
+                        </div>
+                        
+                        <p class="text-gray-600 mb-4">
+                            Resina compuesta universal fotocurable que combina estética excepcional con propiedades físicas superiores, ideal para restauraciones anteriores y posteriores.
+                        </p>
+                        
+                        <!-- Color/Shade Selection -->
+                        <div class="mb-5">
+                            <label class="block text-gray-700 font-medium mb-2">Color/Tono:</label>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <button class="border-2 border-primary bg-primaryLight text-primary px-3 py-1 rounded-md font-medium text-sm">A1</button>
+                                <button class="border border-gray-300 px-3 py-1 rounded-md font-medium text-sm">A2</button>
+                                <button class="border border-gray-300 px-3 py-1 rounded-md font-medium text-sm">A3</button>
+                                <button class="border border-gray-300 px-3 py-1 rounded-md font-medium text-sm">A3.5</button>
+                                <button class="border border-gray-300 px-3 py-1 rounded-md font-medium text-sm">B1</button>
+                                <button class="border border-gray-300 px-3 py-1 rounded-md font-medium text-sm">B2</button>
+                            </div>
+                            
+                            <div class="flex items-center mb-5">
+                                <span class="text-gray-600 mr-3">Cantidad:</span>
+                                <div class="flex border border-gray-300 rounded-lg">
+                                    <button class="px-3 py-1 border-r border-gray-300 text-gray-600 hover:bg-gray-100 transition-all">
+                                        <i class="fas fa-minus text-xs"></i>
+                                    </button>
+                                    <input type="number" value="1" min="1" class="w-12 text-center border-none focus:outline-none py-1">
+                                    <button class="px-3 py-1 border-l border-gray-300 text-gray-600 hover:bg-gray-100 transition-all">
+                                        <i class="fas fa-plus text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="flex gap-3">
+                            <button class="flex-grow bg-primary hover:bg-primaryDark text-white font-semibold py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                            <a href="/producto/filtek-z350-xt" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                Ver detalles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- "Added to Cart" Notification (Hidden by default) -->
+    <div id="added-to-cart-notification" class="fixed bottom-5 right-5 z-40 bg-white rounded-lg shadow-lg p-4 max-w-md hidden">
+        <div class="flex items-start">
+            <div class="placeholder w-16 h-16 rounded flex-shrink-0">
+                <span class="text-xs">IMG</span>
+            </div>
+            <div class="ml-3 flex-grow">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-green-600 font-medium text-sm">¡Producto añadido al carrito!</p>
+                        <h4 class="font-semibold">Filtek Z350 XT - A1</h4>
+                    </div>
+                    <button class="text-gray-400 hover:text-gray-600" id="close-notification">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="flex mt-3">
+                    <a href="/cart" class="bg-primary hover:bg-primaryDark text-white text-sm py-1.5 px-3 rounded transition-all mr-2">
+                        Ver carrito
+                    </a>
+                    <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm py-1.5 px-3 rounded transition-all" id="continue-shopping">
+                        Seguir comprando
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="fixed bottom-5 left-5 z-30">
+        <a href="https://wa.me/56226719562" class="block bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all transform hover:-translate-y-1">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </a>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-5 right-5 bg-primary hover:bg-primaryDark text-white rounded-full p-3 shadow-lg z-30 transition-all transform hover:-translate-y-1 hidden">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript for interactivity -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Mobile filter panel toggle
+        document.getElementById('mobile-filter-button').addEventListener('click', function() {
+            const filterPanel = document.getElementById('mobile-filters-panel');
+            filterPanel.classList.remove('hidden');
+        });
+        
+        document.getElementById('close-mobile-filters').addEventListener('click', function() {
+            const filterPanel = document.getElementById('mobile-filters-panel');
+            filterPanel.classList.add('hidden');
+        });
+        
+        document.getElementById('close-mobile-filters-button').addEventListener('click', function() {
+            const filterPanel = document.getElementById('mobile-filters-panel');
+            filterPanel.classList.add('hidden');
+        });
+        
+        // Back to top button functionality
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+        
+        document.getElementById('back-to-top').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Simulate "Added to Cart" notification
+        // In a real application, this would be triggered when adding a product to cart
+        setTimeout(function() {
+            const notification = document.getElementById('added-to-cart-notification');
+            notification.classList.remove('hidden');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(function() {
+                notification.classList.add('hidden');
+            }, 5000);
+        }, 3000);
+        
+        // Close notification manually
+        document.getElementById('close-notification').addEventListener('click', function() {
+            const notification = document.getElementById('added-to-cart-notification');
+            notification.classList.add('hidden');
+        });
+        
+        document.getElementById('continue-shopping').addEventListener('click', function() {
+            const notification = document.getElementById('added-to-cart-notification');
+            notification.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

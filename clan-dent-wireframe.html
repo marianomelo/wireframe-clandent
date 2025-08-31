@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clan Dent - Suministros Dentales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1A9B9E',
+                        primaryDark: '#168487',
+                        primaryLight: '#E6F7F7',
+                        secondary: '#6B46C1',
+                        accent: '#F59E0B',
+                        dark: '#1F2937',
+                        light: '#F9FAFB'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .shadow-soft {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        
+        .badge {
+            position: absolute;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .placeholder {
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 0.875rem;
+            overflow: hidden;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion-content.active {
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body class="font-sans text-dark bg-gray-50">
+    <!-- Announcement Bar -->
+    <div class="bg-primaryDark text-white text-sm py-2">
+        <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center">
+            <div>
+                <span class="hidden sm:inline">Somos líderes en distribución de productos odontológicos en Chile</span>
+                <span class="sm:hidden">Líderes en productos odontológicos</span>
+            </div>
+            <div class="flex items-center mt-1 sm:mt-0">
+                <a href="tel:+56226719562" class="flex items-center mx-2 hover:text-primaryLight">
+                    <i class="fas fa-phone-alt mr-1 text-xs"></i> +56 2 2671 9562
+                </a>
+                <span class="mx-1 hidden sm:inline">|</span>
+                <a href="mailto:info@clandent.cl" class="flex items-center mx-2 hover:text-primaryLight">
+                    <i class="fas fa-envelope mr-1 text-xs"></i> info@clandent.cl
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <!-- Top Navigation -->
+            <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="/" class="flex items-center">
+                        <div class="h-10 w-40 placeholder rounded flex items-center justify-center bg-primaryLight">
+                            <span class="text-primary font-bold">CLAN DENT</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-grow mx-8 max-w-xl">
+                    <form action="/search" method="get" class="flex w-full rounded-full border-2 border-gray-200 focus-within:border-primary overflow-hidden">
+                        <input type="text" name="q" placeholder="Buscar productos dentales..." aria-label="Buscar productos" class="flex-grow py-2 px-4 outline-none text-sm">
+                        <button type="submit" class="bg-primary text-white px-5 hover:bg-primaryDark transition-all">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Navigation Icons -->
+                <nav class="flex items-center space-x-5">
+                    <a href="/account" class="text-gray-700 hover:text-primary transition-all" aria-label="Mi Cuenta">
+                        <i class="fas fa-user-circle text-xl"></i>
+                    </a>
+                    <a href="/cart" class="text-gray-700 hover:text-primary transition-all relative" aria-label="Ver Carrito">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-2 -right-2 bg-accent text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </a>
+                    <button class="lg:hidden text-gray-700 hover:text-primary transition-all" aria-label="Abrir Menú" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Mobile Search (only visible on smaller screens) -->
+            <div class="md:hidden py-3">
+                <form action="/search" method="get" class="flex w-full rounded-full border-2 border-gray-200 focus-within:border-primary overflow-hidden">
+                    <input type="text" name="q" placeholder="Buscar productos..." aria-label="Buscar productos" class="flex-grow py-2 px-4 outline-none text-sm">
+                    <button type="submit" class="bg-primary text-white px-4 hover:bg-primaryDark transition-all">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Primary Navigation -->
+            <div class="hidden lg:flex justify-center py-3 space-x-10 text-gray-700">
+                <a href="/categorias" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-th-large mr-2"></i> Categorías
+                </a>
+                <a href="/ofertas" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-percentage mr-2"></i> Ofertas
+                </a>
+                <a href="/nuevos" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-star mr-2"></i> Recién Llegados
+                </a>
+                <a href="/marcas" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-tag mr-2"></i> Marcas
+                </a>
+                <a href="/contacto" class="hover:text-primary font-medium transition-all flex items-center">
+                    <i class="fas fa-envelope mr-2"></i> Contacto
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200 py-4 px-4">
+            <nav class="flex flex-col space-y-4">
+                <a href="/categorias" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-th-large w-8"></i> Categorías
+                </a>
+                <a href="/ofertas" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-percentage w-8"></i> Ofertas
+                </a>
+                <a href="/nuevos" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-star w-8"></i> Recién Llegados
+                </a>
+                <a href="/marcas" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-tag w-8"></i> Marcas
+                </a>
+                <a href="/contacto" class="flex items-center py-2 px-4 hover:bg-primaryLight rounded-lg">
+                    <i class="fas fa-envelope w-8"></i> Contacto
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-primaryLight to-white py-12 lg:py-20">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row items-center gap-12">
+                    <!-- Text Content -->
+                    <div class="lg:w-1/2 text-center lg:text-left">
+                        <span class="inline-block bg-primary bg-opacity-10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Oferta Especial</span>
+                        <h1 class="text-4xl lg:text-5xl font-bold text-dark mb-4 leading-tight">
+                            Todo para tus <span class="text-primary">procedimientos dentales</span> en un solo lugar
+                        </h1>
+                        <p class="text-xl text-gray-600 mb-8 max-w-lg">
+                            Descubre nuestra colección premium de productos dentales con hasta 25% de descuento este mes.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="/ofertas" class="btn bg-primary hover:bg-primaryDark text-white font-semibold py-3 px-8 rounded-lg transition-all transform hover:-translate-y-1 inline-flex items-center justify-center">
+                                <i class="fas fa-shopping-cart mr-2"></i> Ver Ofertas
+                            </a>
+                            <a href="/categorias" class="btn bg-white hover:bg-gray-100 text-dark font-semibold py-3 px-8 rounded-lg transition-all border border-gray-200 transform hover:-translate-y-1 inline-flex items-center justify-center">
+                                <i class="fas fa-th-large mr-2"></i> Explorar Categorías
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Hero Image -->
+                    <div class="lg:w-1/2">
+                        <div class="relative">
+                            <div class="absolute -top-6 -left-6 w-20 h-20 bg-accent rounded-full bg-opacity-10 z-0"></div>
+                            <div class="absolute -bottom-8 -right-8 w-32 h-32 bg-primary rounded-full bg-opacity-10 z-0"></div>
+                            <div class="placeholder w-full h-80 lg:h-96 rounded-2xl shadow-soft overflow-hidden relative z-10 bg-white">
+                                <span>IMAGEN PRINCIPAL DEL PRODUCTO</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="flex flex-col items-center text-center p-6 rounded-xl bg-primaryLight bg-opacity-30 hover:bg-opacity-50 transition-all">
+                        <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center mb-4 text-2xl">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Entrega Rápida</h3>
+                        <p class="text-gray-600">Entrega en 24-48 horas en toda la Región Metropolitana</p>
+                    </div>
+                    
+                    <!-- Feature 2 -->
+                    <div class="flex flex-col items-center text-center p-6 rounded-xl bg-primaryLight bg-opacity-30 hover:bg-opacity-50 transition-all">
+                        <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center mb-4 text-2xl">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Garantía de Calidad</h3>
+                        <p class="text-gray-600">Productos certificados con altos estándares de calidad</p>
+                    </div>
+                    
+                    <!-- Feature 3 -->
+                    <div class="flex flex-col items-center text-center p-6 rounded-xl bg-primaryLight bg-opacity-30 hover:bg-opacity-50 transition-all">
+                        <div class="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center mb-4 text-2xl">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Soporte Profesional</h3>
+                        <p class="text-gray-600">Asistencia especializada para tus consultas técnicas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col items-center mb-12">
+                    <h2 class="text-3xl font-bold text-center mb-3">Categorías Destacadas</h2>
+                    <p class="text-gray-600 text-center max-w-2xl">Explora nuestra amplia gama de productos organizados por categorías para facilitar tu búsqueda</p>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Category 1 -->
+                    <a href="/categoria/instrumental" class="group">
+                        <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all transform hover:-translate-y-1">
+                            <div class="placeholder h-48 w-full bg-gray-100 relative overflow-hidden">
+                                <div class="absolute inset-0 bg-primary bg-opacity-10 flex items-center justify-center">
+                                    <i class="fas fa-tools text-primary text-5xl opacity-30 group-hover:opacity-50 transition-all"></i>
+                                </div>
+                                <span class="relative z-10">INSTRUMENTALES</span>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="text-xl font-semibold group-hover:text-primary transition-all">Instrumental</h3>
+                                <p class="text-gray-600 mt-2 text-sm">Descubre nuestra selección de instrumentales de alta calidad</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Category 2 -->
+                    <a href="/categoria/implantes" class="group">
+                        <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all transform hover:-translate-y-1">
+                            <div class="placeholder h-48 w-full bg-gray-100 relative overflow-hidden">
+                                <div class="absolute inset-0 bg-secondary bg-opacity-10 flex items-center justify-center">
+                                    <i class="fas fa-tooth text-secondary text-5xl opacity-30 group-hover:opacity-50 transition-all"></i>
+                                </div>
+                                <span class="relative z-10">IMPLANTES</span>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="text-xl font-semibold group-hover:text-primary transition-all">Implantes</h3>
+                                <p class="text-gray-600 mt-2 text-sm">Soluciones de implantes para todos los procedimientos</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Category 3 -->
+                    <a href="/categoria/desechables" class="group">
+                        <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all transform hover:-translate-y-1">
+                            <div class="placeholder h-48 w-full bg-gray-100 relative overflow-hidden">
+                                <div class="absolute inset-0 bg-primaryDark bg-opacity-10 flex items-center justify-center">
+                                    <i class="fas fa-trash-alt text-primaryDark text-5xl opacity-30 group-hover:opacity-50 transition-all"></i>
+                                </div>
+                                <span class="relative z-10">DESECHABLES</span>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="text-xl font-semibold group-hover:text-primary transition-all">Desechables</h3>
+                                <p class="text-gray-600 mt-2 text-sm">Productos desechables para tu clínica dental</p>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <!-- Category 4 -->
+                    <a href="/categoria/materiales" class="group">
+                        <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all transform hover:-translate-y-1">
+                            <div class="placeholder h-48 w-full bg-gray-100 relative overflow-hidden">
+                                <div class="absolute inset-0 bg-accent bg-opacity-10 flex items-center justify-center">
+                                    <i class="fas fa-flask text-accent text-5xl opacity-30 group-hover:opacity-50 transition-all"></i>
+                                </div>
+                                <span class="relative z-10">MATERIALES</span>
+                            </div>
+                            <div class="p-5">
+                                <h3 class="text-xl font-semibold group-hover:text-primary transition-all">Materiales</h3>
+                                <p class="text-gray-600 mt-2 text-sm">Materiales de alta calidad para tus procedimientos</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="flex justify-center mt-10">
+                    <a href="/categorias" class="inline-flex items-center text-primary hover:text-primaryDark font-medium">
+                        Ver todas las categorías <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Offers Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="inline-block bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-medium mb-2">Tiempo Limitado</span>
+                        <h2 class="text-3xl font-bold">Ofertas Especiales</h2>
+                    </div>
+                    <a href="/ofertas" class="hidden sm:inline-flex items-center text-primary hover:text-primaryDark font-medium">
+                        Ver todas las ofertas <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Product 1 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 left-3 bg-red-500 text-white">-25%</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14">Kit de Fresas Diamantadas Premium</h3>
+                            <div class="flex items-center mb-3">
+                                <div class="text-sm text-gray-500 line-through mr-2">$24.990</div>
+                                <div class="text-xl font-bold text-primary">$18.740</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star-half-alt text-yellow-400"></i>
+                                    <span class="text-xs text-gray-500 ml-1">(42)</span>
+                                </div>
+                                <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                            </div>
+                            <button class="w-full bg-primary hover:bg-primaryDark text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 left-3 bg-red-500 text-white">-15%</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14">Resina Compuesta Fotocurable 4g</h3>
+                            <div class="flex items-center mb-3">
+                                <div class="text-sm text-gray-500 line-through mr-2">$32.500</div>
+                                <div class="text-xl font-bold text-primary">$27.625</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <span class="text-xs text-gray-500 ml-1">(87)</span>
+                                </div>
+                                <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                            </div>
+                            <button class="w-full bg-primary hover:bg-primaryDark text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 left-3 bg-red-500 text-white">-30%</span>
+                            <span class="badge top-3 right-3 bg-accent text-white">POPULAR</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14">Guantes de Nitrilo Sin Polvo (Caja x100)</h3>
+                            <div class="flex items-center mb-3">
+                                <div class="text-sm text-gray-500 line-through mr-2">$19.990</div>
+                                <div class="text-xl font-bold text-primary">$13.990</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="far fa-star text-yellow-400"></i>
+                                    <span class="text-xs text-gray-500 ml-1">(56)</span>
+                                </div>
+                                <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                            </div>
+                            <button class="w-full bg-primary hover:bg-primaryDark text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 left-3 bg-red-500 text-white">-20%</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14">Alginato Cromático Premium 450g</h3>
+                            <div class="flex items-center mb-3">
+                                <div class="text-sm text-gray-500 line-through mr-2">$15.490</div>
+                                <div class="text-xl font-bold text-primary">$12.390</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star text-yellow-400"></i>
+                                    <i class="fas fa-star-half-alt text-yellow-400"></i>
+                                    <span class="text-xs text-gray-500 ml-1">(38)</span>
+                                </div>
+                                <div class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded">Pocas Unidades</div>
+                            </div>
+                            <button class="w-full bg-primary hover:bg-primaryDark text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center mt-8 sm:hidden">
+                    <a href="/ofertas" class="inline-flex items-center text-primary hover:text-primaryDark font-medium">
+                        Ver todas las ofertas <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Arrivals Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="inline-block bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm font-medium mb-2">Recién Llegados</span>
+                        <h2 class="text-3xl font-bold">Nuevos Productos</h2>
+                    </div>
+                    <a href="/nuevos" class="hidden sm:inline-flex items-center text-primary hover:text-primaryDark font-medium">
+                        Ver todos los nuevos <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- New Product 1 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 right-3 bg-blue-500 text-white">NUEVO</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14">Lámpara de Fotocurado LED Inalámbrica</h3>
+                            <div class="mb-3">
+                                <div class="text-xl font-bold text-dark">$89.990</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <span class="text-xs text-gray-500">Sin valoraciones</span>
+                                </div>
+                                <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                            </div>
+                            <button class="w-full bg-dark hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- New Product 2 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 right-3 bg-blue-500 text-white">NUEVO</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14">Escáner Intraoral Digital 3D</h3>
+                            <div class="mb-3">
+                                <div class="text-xl font-bold text-dark">$1.250.000</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <span class="text-xs text-gray-500">Sin valoraciones</span>
+                                </div>
+                                <div class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded">Por Encargo</div>
+                            </div>
+                            <button class="w-full bg-dark hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-info-circle mr-2"></i> Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- New Product 3 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 right-3 bg-blue-500 text-white">NUEVO</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14">Cemento de Vidrio Ionómero para Restauración</h3>
+                            <div class="mb-3">
+                                <div class="text-xl font-bold text-dark">$45.900</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <span class="text-xs text-gray-500">Sin valoraciones</span>
+                                </div>
+                                <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                            </div>
+                            <button class="w-full bg-dark hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- New Product 4 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100">
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 right-3 bg-blue-500 text-white">NUEVO</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2 h-14">Kit Blanqueamiento Dental Profesional</h3>
+                            <div class="mb-3">
+                                <div class="text-xl font-bold text-dark">$78.500</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <span class="text-xs text-gray-500">Sin valoraciones</span>
+                                </div>
+                                <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">En Stock</div>
+                            </div>
+                            <button class="w-full bg-dark hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center mt-8 sm:hidden">
+                    <a href="/nuevos" class="inline-flex items-center text-primary hover:text-primaryDark font-medium">
+                        Ver todos los nuevos <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Near Expiration Section -->
+        <section class="py-16 bg-gradient-to-b from-white to-primaryLight">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <span class="inline-block bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-medium mb-2">¡Aprovecha Ya!</span>
+                        <h2 class="text-3xl font-bold">Pronto Vencimiento</h2>
+                    </div>
+                    <a href="/pronto-vencimiento" class="hidden sm:inline-flex items-center text-primary hover:text-primaryDark font-medium">
+                        Ver todos <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Stock Off Product 1 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100 relative">
+                        <div class="absolute -right-10 top-6 bg-orange-500 text-white transform rotate-45 py-1 w-40 text-center text-sm font-bold z-10">
+                            STOCK OFF
+                        </div>
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 left-3 bg-red-500 text-white">-40%</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2">Yeso Dental Tipo IV - 1kg</h3>
+                            <p class="text-sm text-gray-500 mb-3">Vencimiento: Agosto 2025</p>
+                            <div class="flex items-center mb-3">
+                                <div class="text-sm text-gray-500 line-through mr-2">$18.900</div>
+                                <div class="text-xl font-bold text-orange-600">$11.340</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="bg-orange-100 text-orange-600 px-2 py-1 rounded text-xs flex items-center">
+                                    <i class="fas fa-clock mr-1"></i> Stock limitado
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-semibold">12</span> disponibles
+                                </div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-3">
+                                <div class="bg-orange-500 h-1.5 rounded-full" style="width: 35%"></div>
+                            </div>
+                            <button class="w-full bg-secondary hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Stock Off Product 2 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100 relative">
+                        <div class="absolute -right-10 top-6 bg-orange-500 text-white transform rotate-45 py-1 w-40 text-center text-sm font-bold z-10">
+                            STOCK OFF
+                        </div>
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 left-3 bg-red-500 text-white">-35%</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2">Mascarillas Quirúrgicas Azules (Caja x50)</h3>
+                            <p class="text-sm text-gray-500 mb-3">Vencimiento: Julio 2025</p>
+                            <div class="flex items-center mb-3">
+                                <div class="text-sm text-gray-500 line-through mr-2">$7.990</div>
+                                <div class="text-xl font-bold text-orange-600">$5.190</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="bg-orange-100 text-orange-600 px-2 py-1 rounded text-xs flex items-center">
+                                    <i class="fas fa-clock mr-1"></i> Stock limitado
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-semibold">25</span> disponibles
+                                </div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-3">
+                                <div class="bg-orange-500 h-1.5 rounded-full" style="width: 20%"></div>
+                            </div>
+                            <button class="w-full bg-secondary hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Stock Off Product 3 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-lg transition-all border border-gray-100 relative">
+                        <div class="absolute -right-10 top-6 bg-orange-500 text-white transform rotate-45 py-1 w-40 text-center text-sm font-bold z-10">
+                            STOCK OFF
+                        </div>
+                        <div class="relative">
+                            <div class="placeholder w-full h-56 bg-gray-100">
+                                <span>IMAGEN PRODUCTO</span>
+                            </div>
+                            <span class="badge top-3 left-3 bg-red-500 text-white">-50%</span>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="text-lg font-semibold text-dark mb-2">Pasta Profiláctica Sabor Menta 250g</h3>
+                            <p class="text-sm text-gray-500 mb-3">Vencimiento: Junio 2025</p>
+                            <div class="flex items-center mb-3">
+                                <div class="text-sm text-gray-500 line-through mr-2">$12.450</div>
+                                <div class="text-xl font-bold text-orange-600">$6.225</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="bg-orange-100 text-orange-600 px-2 py-1 rounded text-xs flex items-center">
+                                    <i class="fas fa-clock mr-1"></i> Stock limitado
+                                </div>
+                                <div class="text-sm">
+                                    <span class="font-semibold">8</span> disponibles
+                                </div>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-3">
+                                <div class="bg-orange-500 h-1.5 rounded-full" style="width: 10%"></div>
+                            </div>
+                            <button class="w-full bg-secondary hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-all flex items-center justify-center">
+                                <i class="fas fa-cart-plus mr-2"></i> Añadir al Carrito
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center mt-8 sm:hidden">
+                    <a href="/pronto-vencimiento" class="inline-flex items-center text-primary hover:text-primaryDark font-medium">
+                        Ver todos <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Delivery Options -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-10">Opciones de Entrega</h2>
+                <div class="flex flex-wrap justify-center gap-8">
+                    <!-- Delivery Option 1 -->
+                    <div class="flex flex-col items-center text-center max-w-xs p-8 rounded-xl bg-primaryLight hover:bg-primaryLight hover:bg-opacity-75 transition-all">
+                        <div class="w-20 h-20 bg-primary rounded-full text-white flex items-center justify-center text-3xl mb-6">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Retiro en Tienda</h3>
+                        <div class="text-3xl font-bold text-primary mb-2">4 HORAS</div>
+                        <p class="text-gray-600">Disponible en nuestras sucursales previa confirmación de pago</p>
+                    </div>
+                    
+                    <!-- Delivery Option 2 -->
+                    <div class="flex flex-col items-center text-center max-w-xs p-8 rounded-xl bg-primaryLight hover:bg-primaryLight hover:bg-opacity-75 transition-all">
+                        <div class="w-20 h-20 bg-primary rounded-full text-white flex items-center justify-center text-3xl mb-6">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Despacho R.M.</h3>
+                        <div class="text-3xl font-bold text-primary mb-2">48 HORAS</div>
+                        <p class="text-gray-600">Entrega dentro de Santiago en días hábiles</p>
+                    </div>
+                    
+                    <!-- Delivery Option 3 -->
+                    <div class="flex flex-col items-center text-center max-w-xs p-8 rounded-xl bg-primaryLight hover:bg-primaryLight hover:bg-opacity-75 transition-all">
+                        <div class="w-20 h-20 bg-primary rounded-full text-white flex items-center justify-center text-3xl mb-6">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-2">Envío GRATIS</h3>
+                        <div class="text-3xl font-bold text-primary mb-2">+$60.000</div>
+                        <p class="text-gray-600">En compras sobre $60.000 en toda la provincia de Santiago</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto">
+                    <h2 class="text-3xl font-bold text-center mb-3">Preguntas Frecuentes</h2>
+                    <p class="text-center text-gray-600 mb-10">Encuentra respuestas a las dudas más comunes sobre nuestros productos y servicios</p>
+                    
+                    <div class="bg-white rounded-xl shadow-soft overflow-hidden">
+                        <!-- FAQ Item 1 -->
+                        <div class="border-b border-gray-100 last:border-b-0">
+                            <button class="accordion-header w-full flex items-center justify-between p-5 hover:bg-primaryLight hover:bg-opacity-30 transition-all">
+                                <span class="flex items-center font-semibold text-left">
+                                    <i class="fas fa-question-circle text-primary mr-3"></i>
+                                    ¿Cómo realizo una compra en la tienda online?
+                                </span>
+                                <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="accordion-content hidden bg-gray-50 p-5 border-t border-gray-100">
+                                <p class="text-gray-700">
+                                    Para comprar en nuestra tienda online, simplemente selecciona los productos que necesitas, agrégalos al carrito y sigue el proceso de checkout. Podrás elegir el método de pago y la opción de envío que prefieras.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 2 -->
+                        <div class="border-b border-gray-100 last:border-b-0">
+                            <button class="accordion-header w-full flex items-center justify-between p-5 hover:bg-primaryLight hover:bg-opacity-30 transition-all">
+                                <span class="flex items-center font-semibold text-left">
+                                    <i class="fas fa-question-circle text-primary mr-3"></i>
+                                    ¿No encuentras el producto que buscas?
+                                </span>
+                                <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="accordion-content hidden bg-gray-50 p-5 border-t border-gray-100">
+                                <p class="text-gray-700">
+                                    Si no encuentras el producto que necesitas, contáctanos por teléfono al +56 2 2671 9562 o por email a info@clandent.cl y haremos lo posible por conseguirlo para ti. Trabajamos con numerosos proveedores internacionales.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 3 -->
+                        <div class="border-b border-gray-100 last:border-b-0">
+                            <button class="accordion-header w-full flex items-center justify-between p-5 hover:bg-primaryLight hover:bg-opacity-30 transition-all">
+                                <span class="flex items-center font-semibold text-left">
+                                    <i class="fas fa-question-circle text-primary mr-3"></i>
+                                    ¿Cómo puedo usar los cupones de descuento?
+                                </span>
+                                <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="accordion-content hidden bg-gray-50 p-5 border-t border-gray-100">
+                                <p class="text-gray-700">
+                                    Durante el proceso de checkout, encontrarás una sección donde podrás ingresar tu código de cupón. Una vez aplicado, se descontará automáticamente del total de tu compra.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 4 -->
+                        <div class="border-b border-gray-100 last:border-b-0">
+                            <button class="accordion-header w-full flex items-center justify-between p-5 hover:bg-primaryLight hover:bg-opacity-30 transition-all">
+                                <span class="flex items-center font-semibold text-left">
+                                    <i class="fas fa-question-circle text-primary mr-3"></i>
+                                    ¿Cómo puedo hacer seguimiento a mi pedido?
+                                </span>
+                                <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="accordion-content hidden bg-gray-50 p-5 border-t border-gray-100">
+                                <p class="text-gray-700">
+                                    Una vez que tu pedido sea despachado, recibirás un email con el número de seguimiento. También puedes revisar el estado de tu pedido en la sección "Mi Cuenta" de nuestra página web.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 5 -->
+                        <div class="border-b border-gray-100 last:border-b-0">
+                            <button class="accordion-header w-full flex items-center justify-between p-5 hover:bg-primaryLight hover:bg-opacity-30 transition-all">
+                                <span class="flex items-center font-semibold text-left">
+                                    <i class="fas fa-question-circle text-primary mr-3"></i>
+                                    ¿Qué pasa con mi carrito si la compra falla?
+                                </span>
+                                <i class="fas fa-chevron-down text-primary transition-transform duration-300"></i>
+                            </button>
+                            <div class="accordion-content hidden bg-gray-50 p-5 border-t border-gray-100">
+                                <p class="text-gray-700">
+                                    Si la transacción falla, los productos se mantendrán en tu carrito. Si inicias sesión con tu cuenta, el carrito se guardará por 7 días para que puedas completar la compra posteriormente.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-8">
+                        <a href="/ayuda" class="inline-flex items-center text-primary hover:text-primaryDark font-medium">
+                            Ver todas las preguntas frecuentes <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Brands Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-3">Nuestras Marcas</h2>
+                <p class="text-center text-gray-600 mb-10">Trabajamos con las mejores marcas del mercado odontológico</p>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center justify-items-center">
+                    <!-- Brand 1 -->
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 1</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Brand 2 -->
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 2</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Brand 3 -->
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 3</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Brand 4 -->
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 4</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Brand 5 -->
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 5</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Brand 6 -->
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 6</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional brands -->
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 7</span>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 8</span>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 9</span>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 10</span>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 11</span>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full h-20 bg-white rounded-lg shadow-soft hover:shadow-md transition-all flex items-center justify-center p-4">
+                        <div class="placeholder w-full h-full flex items-center justify-center">
+                            <span class="text-gray-400 text-sm">MARCA 12</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="py-16 bg-gradient-to-r from-primary to-primaryDark text-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold mb-3">Mantente Informado</h2>
+                    <p class="text-white text-opacity-80 mb-8">Suscríbete para recibir noticias sobre nuevos productos, promociones exclusivas y consejos útiles para profesionales dentales.</p>
+                    
+                    <form class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+                        <input type="email" placeholder="Tu correo electrónico" class="flex-grow px-4 py-3 rounded-lg focus:outline-none text-dark">
+                        <button type="submit" class="bg-dark hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg transition-all">
+                            Suscribirse
+                        </button>
+                    </form>
+                    
+                    <p class="text-white text-opacity-60 text-sm mt-4">Respetamos tu privacidad. Nunca compartiremos tu correo electrónico.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="mb-6">
+                        <div class="h-12 w-auto placeholder rounded-lg flex items-center justify-center bg-white bg-opacity-10 max-w-[180px]">
+                            <span class="text-white font-bold">CLAN DENT</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Distribuidores de productos odontológicos de alta calidad, al servicio de profesionales dentales en todo Chile desde 2005.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2">Contáctanos</h3>
+                    
+                    <div class="mb-6">
+                        <p class="font-semibold mb-2">Santiago:</p>
+                        <address class="text-gray-300 not-italic">
+                            <p class="mb-1">Jaime Castillo Velasco #2349</p>
+                            <p class="mb-1">Ñuñoa, Santiago</p>
+                            <p class="mb-1">
+                                <a href="tel:+56226719562" class="hover:text-primary">+56 2 2671 9562</a>
+                            </p>
+                            <p>
+                                <a href="mailto:info@clandent.cl" class="hover:text-primary">info@clandent.cl</a>
+                            </p>
+                        </address>
+                    </div>
+                    
+                    <div>
+                        <p class="font-semibold mb-2">Concepción:</p>
+                        <address class="text-gray-300 not-italic">
+                            <p class="mb-1">Tucapel #156, Local n° 3</p>
+                            <p class="mb-1">Concepción</p>
+                            <p class="mb-1">
+                                <a href="tel:+56412125186" class="hover:text-primary">+56 41 212 51 86</a>
+                            </p>
+                            <p>
+                                <a href="mailto:concepcion@clandent.cl" class="hover:text-primary">concepcion@clandent.cl</a>
+                            </p>
+                        </address>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2">Enlaces Rápidos</h3>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="/categorias" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Categorías
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/ofertas" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Ofertas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/nuevos" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Recién Llegados
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/marcas" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Marcas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/blog" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/sobre-nosotros" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Sobre Nosotros
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/contacto" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Contacto
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Legal & Payment -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6 border-b border-gray-700 pb-2">Información Legal</h3>
+                    <ul class="space-y-3 mb-8">
+                        <li>
+                            <a href="/terminos" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Términos y Condiciones
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/privacidad" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Política de Privacidad
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/envios" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Información de Envío
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/devoluciones" class="text-gray-300 hover:text-primary transition-all flex items-center">
+                                <i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Política de Devoluciones
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <h3 class="text-lg font-semibold mb-4">Medios de Pago</h3>
+                    <div class="flex space-x-3">
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">VISA</span>
+                        </div>
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">MC</span>
+                        </div>
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">AMEX</span>
+                        </div>
+                        <div class="h-8 w-12 bg-white rounded flex items-center justify-center">
+                            <span class="text-dark text-xs">WEBPAY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400 text-sm">
+                <p class="mb-2">&copy; 2025 Clan Dent. Todos los derechos reservados.</p>
+                <p>Diseño profesional | Wireframe con Tailwind CSS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for accordion functionality -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.fas.fa-chevron-down');
+                
+                // Toggle current content
+                content.classList.toggle('hidden');
+                icon.classList.toggle('transform');
+                icon.classList.toggle('rotate-180');
+                
+                // Optional: Close other accordions
+                document.querySelectorAll('.accordion-content').forEach(item => {
+                    if (item !== content && !item.classList.contains('hidden')) {
+                        item.classList.add('hidden');
+                        const otherIcon = item.previousElementSibling.querySelector('.fas.fa-chevron-down');
+                        otherIcon.classList.remove('rotate-180');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
