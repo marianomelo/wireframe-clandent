@@ -1,0 +1,6 @@
+# Cloudflare Pages redirects
+/about  /clan-dent-about-page.html  200
+/contact  /clan-dent-contact-page.html  200
+/products  /clan-dent-product-page.html  200
+/category  /clan-dent-category-page-fixed.html  200
+/cart  /clan-dent-cart-wireframe.html  200
